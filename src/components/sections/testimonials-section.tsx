@@ -9,11 +9,11 @@ export function TestimonialsSection() {
     <section className="bg-white" style={{ padding: '76px 48px' }}>
       {/* Header */}
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-stone-400">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-neutral-400">
           Testimonios
         </div>
         <h2
-          className="font-sans font-semibold mt-[14px] text-sage-900"
+          className="font-sans font-semibold mt-[14px] text-brand-900"
           style={{
             fontSize: '34px',
             letterSpacing: '-0.02em',
@@ -39,7 +39,7 @@ export function TestimonialsSection() {
           <motion.div
             key={t.n}
             variants={staggerItem}
-            className="fondi-card bg-white border border-stone-200"
+            className="fondi-card bg-white border border-neutral-200"
             style={{
               borderRadius: '10px',
               padding: '30px',
@@ -50,7 +50,7 @@ export function TestimonialsSection() {
                 ★★★★★
               </div>
               <div
-                className="font-serif text-sage-300"
+                className="font-serif text-brand-300"
                 style={{ fontSize: '58px', lineHeight: 0.55 }}
               >
                 "
@@ -58,7 +58,7 @@ export function TestimonialsSection() {
             </div>
 
             <p
-              className="font-serif text-sage-900"
+              className="font-serif text-brand-900"
               style={{
                 fontSize: '17px',
                 lineHeight: 1.55,
@@ -71,7 +71,7 @@ export function TestimonialsSection() {
 
             <div className="flex items-center gap-3">
               <div
-                className="flex items-center justify-center rounded-full font-semibold text-[15px] bg-sage-200 text-sage-800"
+                className="flex items-center justify-center rounded-full font-semibold text-[15px] bg-brand-200 text-brand-800"
                 style={{
                   width: '38px',
                   height: '38px',
@@ -79,7 +79,7 @@ export function TestimonialsSection() {
               >
                 {t.i}
               </div>
-              <div className="text-sm font-semibold text-stone-700">
+              <div className="text-sm font-semibold text-neutral-700">
                 {t.n}
               </div>
             </div>

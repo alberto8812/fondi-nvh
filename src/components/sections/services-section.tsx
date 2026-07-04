@@ -9,18 +9,18 @@ export function ServicesSection() {
   return (
     <section
       id="servicios"
-      className="bg-stone-100 border-t border-stone-200"
+      className="bg-neutral-100 border-t border-neutral-200"
       style={{
         padding: '76px 48px',
       }}
     >
       {/* Header */}
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-stone-400">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-neutral-400">
           Nuestros servicios
         </div>
         <h2
-          className="font-sans font-semibold mt-[14px] text-sage-900"
+          className="font-sans font-semibold mt-[14px] text-brand-900"
           style={{
             fontSize: '34px',
             letterSpacing: '-0.02em',
@@ -47,14 +47,14 @@ export function ServicesSection() {
           <motion.div
             key={s.t}
             variants={staggerItem}
-            className="fondi-card flex gap-5 items-start bg-white border border-stone-200"
+            className="fondi-card flex gap-5 items-start bg-white border border-neutral-200"
             style={{
               borderRadius: '10px',
               padding: '30px',
             }}
           >
             <div
-              className="flex items-center justify-center flex-shrink-0 bg-sage-900 text-sage-300"
+              className="flex items-center justify-center flex-shrink-0 bg-brand-900 text-brand-300"
               style={{
                 width: '44px',
                 height: '44px',
@@ -65,12 +65,12 @@ export function ServicesSection() {
             </div>
             <div>
               <h3
-                className="font-sans font-semibold text-sage-900"
+                className="font-sans font-semibold text-brand-900"
                 style={{ fontSize: '19px', margin: '2px 0 8px' }}
               >
                 {s.t}
               </h3>
-              <p className="text-[15px] leading-[1.55] m-0 text-stone-600">
+              <p className="text-[15px] leading-[1.55] m-0 text-neutral-600">
                 {s.d}
               </p>
             </div>

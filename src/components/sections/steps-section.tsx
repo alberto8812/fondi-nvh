@@ -9,11 +9,11 @@ export function StepsSection() {
     <section id="como-funciona" className="bg-white" style={{ padding: '120px 48px 76px' }}>
       {/* Header */}
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-stone-400">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-neutral-400">
           Cómo funciona
         </div>
         <h2
-          className="font-sans font-semibold mt-[14px] text-sage-900"
+          className="font-sans font-semibold mt-[14px] text-brand-900"
           style={{
             fontSize: '34px',
             letterSpacing: '-0.02em',
@@ -31,7 +31,7 @@ export function StepsSection() {
       {/* Steps — each child gets its own whileInView + delay; the grid container has overflow:hidden
           so we can't use a staggerContainer wrapper (IntersectionObserver can't observe display:contents) */}
       <div
-        className="grid grid-cols-3 border border-stone-200 bg-white"
+        className="grid grid-cols-3 border border-neutral-200 bg-white"
         style={{
           borderRadius: '10px',
           overflow: 'hidden',
@@ -44,21 +44,21 @@ export function StepsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: EASE, delay: i * 0.09 }}
             viewport={VP}
-            className={i < steps.length - 1 ? 'border-r border-stone-200' : ''}
+            className={i < steps.length - 1 ? 'border-r border-neutral-200' : ''}
             style={{
               padding: '34px 30px',
             }}
           >
-            <div className="font-mono text-[13px] tracking-[.08em] text-sage-500">
+            <div className="font-mono text-[13px] tracking-[.08em] text-brand-500">
               PASO {p.n}
             </div>
             <h3
-              className="font-sans font-semibold text-sage-900"
+              className="font-sans font-semibold text-brand-900"
               style={{ fontSize: '20px', margin: '14px 0 8px' }}
             >
               {p.t}
             </h3>
-            <p className="text-[15px] leading-[1.55] m-0 text-stone-600">
+            <p className="text-[15px] leading-[1.55] m-0 text-neutral-600">
               {p.d}
             </p>
           </motion.div>

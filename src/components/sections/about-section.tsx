@@ -9,12 +9,12 @@ export function AboutSection() {
   return (
     <section
       id="nosotros"
-      className="grid grid-cols-2 gap-12 items-center bg-sage-900"
+      className="grid grid-cols-2 gap-12 items-center bg-brand-900"
       style={{ padding: '76px 48px' }}
     >
       {/* Text — slides from left */}
       <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={VP}>
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-sage-300">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-300">
           {about.eyebrow}
         </div>
         <h2
@@ -30,7 +30,7 @@ export function AboutSection() {
           {about.headline}
         </h2>
         <p
-          className="text-base leading-[1.65] text-sage-200"
+          className="text-base leading-[1.65] text-brand-200"
           style={{ margin: '0 0 24px' }}
         >
           {about.body}
@@ -46,7 +46,7 @@ export function AboutSection() {
         initial="hidden"
         whileInView="visible"
         viewport={VP}
-        className="relative rounded-xl overflow-hidden bg-sage-800"
+        className="relative rounded-xl overflow-hidden bg-brand-800"
         style={{ minHeight: '340px' }}
       >
         <img

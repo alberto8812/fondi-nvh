@@ -17,7 +17,7 @@ const beat = (delay: number) => ({
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative overflow-hidden bg-sage-900">
+    <section id="hero" className="relative overflow-hidden bg-brand-900">
       {/* Background image */}
       <img
         src={hero.bgImage}
@@ -32,7 +32,7 @@ export function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(30,38,32,.96) 0%, rgba(30,38,32,.82) 45%, rgba(30,38,32,.5) 100%)',
+            'linear-gradient(90deg, rgba(11, 63, 124,.96) 0%, rgba(11, 63, 124,.82) 45%, rgba(11, 63, 124,.5) 100%)',
         }}
       />
 
@@ -41,9 +41,9 @@ export function HeroSection() {
         {/* Beat 1 — eyebrow */}
         <motion.div {...beat(0)}>
           <div
-            className="font-mono text-xs font-medium tracking-[.14em] uppercase flex items-center gap-2 text-sage-300"
+            className="font-mono text-xs font-medium tracking-[.14em] uppercase flex items-center gap-2 text-brand-300"
           >
-            <span className="w-[22px] h-px bg-sage-400" />
+            <span className="w-[22px] h-px bg-brand-400" />
             {hero.eyebrow}
           </div>
         </motion.div>
@@ -61,7 +61,7 @@ export function HeroSection() {
           }}
         >
           {hero.headline}{' '}
-          <span className="font-serif italic font-normal text-sage-300">
+          <span className="font-serif italic font-normal text-brand-300">
             {hero.headlineItalic}
           </span>
         </motion.h1>
@@ -69,7 +69,7 @@ export function HeroSection() {
         {/* Beat 3 — subline */}
         <motion.p
           {...beat(0.26)}
-          className="font-serif text-sage-200"
+          className="font-serif text-brand-200"
           style={{
             fontSize: '21px',
             lineHeight: 1.5,

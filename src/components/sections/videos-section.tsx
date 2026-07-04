@@ -11,18 +11,18 @@ export function VideosSection() {
   return (
     <section
       id="videos"
-      className="bg-sage-50 border-t border-stone-200"
+      className="bg-brand-50 border-t border-neutral-200"
       style={{
         padding: '76px 48px',
       }}
     >
       {/* Header */}
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VP}>
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-sage-600">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-600">
           Experiencias en video
         </div>
         <h2
-          className="font-sans font-semibold mt-[14px] text-sage-900"
+          className="font-sans font-semibold mt-[14px] text-brand-900"
           style={{
             fontSize: '34px',
             letterSpacing: '-0.02em',
@@ -35,7 +35,7 @@ export function VideosSection() {
           Nuestros clientes lo cuentan{' '}
           <span className="font-serif italic font-medium">mejor que nosotros.</span>
         </h2>
-        <p className="text-[15px] m-0 mb-10 text-stone-500">
+        <p className="text-[15px] m-0 mb-10 text-neutral-500">
           Pasa el cursor para ver un adelanto — haz clic para verlo completo.
         </p>
       </motion.div>
@@ -73,7 +73,7 @@ interface VideoCardProps {
 function VideoCard({ video, isActive, onEnter, onLeave }: VideoCardProps) {
   return (
     <div
-      className="relative cursor-pointer overflow-hidden border border-stone-200 bg-sage-900"
+      className="relative cursor-pointer overflow-hidden border border-neutral-200 bg-brand-900"
       style={{
         aspectRatio: '16/10',
         borderRadius: '10px',
@@ -95,16 +95,16 @@ function VideoCard({ video, isActive, onEnter, onLeave }: VideoCardProps) {
       />
 
       <div
-        className="absolute left-3 bottom-3 flex items-center gap-[9px] rounded-full px-3.5 py-2 transition-all duration-200 bg-stone-50/94"
+        className="absolute left-3 bottom-3 flex items-center gap-[9px] rounded-full px-3.5 py-2 transition-all duration-200 bg-neutral-50/94"
         style={{
-          boxShadow: '0 2px 8px rgba(30,38,32,.15)',
+          boxShadow: '0 2px 8px rgba(11, 63, 124,.15)',
           transform: isActive ? 'scale(1.05)' : 'scale(1)',
         }}
       >
-        <svg width="13" height="13" viewBox="0 0 24 24" className="fill-sage-800">
+        <svg width="13" height="13" viewBox="0 0 24 24" className="fill-brand-800">
           <path d="M7 4.5v15l13-7.5z" />
         </svg>
-        <span className="font-mono text-xs font-medium text-sage-900">
+        <span className="font-mono text-xs font-medium text-brand-900">
           {video.t}
         </span>
       </div>

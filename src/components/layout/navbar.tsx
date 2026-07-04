@@ -8,12 +8,12 @@ const NAV_LINKS = [
 export function Navbar() {
   return (
     <header
-      className="sticky top-0 z-50 h-[70px] flex items-center justify-between px-10 bg-sage-900 border-b border-sage-800"
+      className="sticky top-0 z-50 h-[70px] flex items-center justify-between px-10 bg-brand-900 border-b border-brand-800"
     >
       {/* Logo */}
       <a href="#hero" className="flex items-center gap-[9px] no-underline">
         <span
-          className="inline-flex w-[30px] h-[30px] rounded-[7px] items-center justify-center font-serif font-semibold text-lg italic bg-sage-300 text-sage-900"
+          className="inline-flex w-[30px] h-[30px] rounded-[7px] items-center justify-center font-serif font-semibold text-lg italic bg-brand-300 text-brand-900"
         >
           F
         </span>
@@ -28,7 +28,7 @@ export function Navbar() {
           <a
             key={link.href}
             href={link.href}
-            className="text-sm font-medium text-sage-300 hover:text-white transition-colors duration-200 no-underline"
+            className="text-sm font-medium text-brand-300 hover:text-white transition-colors duration-200 no-underline"
           >
             {link.label}
           </a>
@@ -38,7 +38,7 @@ export function Navbar() {
       {/* CTA */}
       <a
         href={`#contacto`}
-        className="text-sm font-semibold px-[18px] py-2.5 rounded-md no-underline transition-colors duration-200 bg-sage-300 text-sage-900 hover:bg-sage-400"
+        className="text-sm font-semibold px-[18px] py-2.5 rounded-md no-underline transition-colors duration-200 bg-brand-300 text-brand-900 hover:bg-brand-400"
       >
         Solicitar crédito →
       </a>

@@ -22,7 +22,7 @@ export function ContactSection() {
   return (
     <section
       id="contacto"
-      className="bg-stone-100 border-t border-stone-200"
+      className="bg-neutral-100 border-t border-neutral-200"
       style={{
         padding: '76px 48px',
       }}
@@ -30,11 +30,11 @@ export function ContactSection() {
       <div className="grid grid-cols-2 gap-12">
         {/* Left: info — slides from left */}
         <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={VP}>
-          <div className="font-mono text-xs tracking-[.14em] uppercase text-stone-400">
+          <div className="font-mono text-xs tracking-[.14em] uppercase text-neutral-400">
             {contact.eyebrow}
           </div>
           <h2
-            className="font-sans font-semibold text-sage-900"
+            className="font-sans font-semibold text-brand-900"
             style={{
               fontSize: '34px',
               letterSpacing: '-0.02em',
@@ -47,7 +47,7 @@ export function ContactSection() {
             <span className="font-serif italic font-medium">{contact.headlineItalic}</span>
           </h2>
           <p
-            className="text-base leading-[1.65] text-stone-600"
+            className="text-base leading-[1.65] text-neutral-600"
             style={{ margin: '0 0 28px', maxWidth: '400px' }}
           >
             {contact.subtext}
@@ -67,19 +67,19 @@ export function ContactSection() {
 
           {/* Contact details */}
           <div
-            className="flex flex-col gap-3 pt-[22px] border-t border-stone-200"
+            className="flex flex-col gap-3 pt-[22px] border-t border-neutral-200"
           >
             <a
               href={contact.telHref}
-              className="flex items-center gap-3 text-[15px] no-underline hover:text-sage-900 transition-colors text-stone-600"
+              className="flex items-center gap-3 text-[15px] no-underline hover:text-brand-900 transition-colors text-neutral-600"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" className="stroke-sage-600">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" className="stroke-brand-600">
                 <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z" />
               </svg>
               {contact.phone}
             </a>
-            <div className="flex items-center gap-3 text-[15px] text-stone-600">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" className="stroke-sage-600">
+            <div className="flex items-center gap-3 text-[15px] text-neutral-600">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" className="stroke-brand-600">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <path d="m3 7 9 6 9-6" />
               </svg>
@@ -97,12 +97,12 @@ export function ContactSection() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="flex flex-col items-center justify-center rounded-xl bg-white border border-stone-200"
+                className="flex flex-col items-center justify-center rounded-xl bg-white border border-neutral-200"
                 style={{ padding: '32px', minHeight: '300px' }}
               >
-                <div className="font-serif italic text-[34px] text-sage-900">✓</div>
-                <p className="font-sans font-semibold text-lg mt-4 text-sage-900">¡Recibimos tu solicitud!</p>
-                <p className="text-[15px] text-center mt-2 text-stone-600">
+                <div className="font-serif italic text-[34px] text-brand-900">✓</div>
+                <p className="font-sans font-semibold text-lg mt-4 text-brand-900">¡Recibimos tu solicitud!</p>
+                <p className="text-[15px] text-center mt-2 text-neutral-600">
                   Un asesor te contactará a la brevedad.
                 </p>
               </motion.div>
@@ -112,45 +112,45 @@ export function ContactSection() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2, ease: EASE }}
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-4 rounded-xl bg-white border border-stone-200"
+                className="flex flex-col gap-4 rounded-xl bg-white border border-neutral-200"
                 style={{ padding: '32px' }}
               >
                 <div>
-                  <label className="block text-[13px] font-medium mb-1.5 text-stone-600">
+                  <label className="block text-[13px] font-medium mb-1.5 text-neutral-600">
                     Nombre completo
                   </label>
                   <input
                     type="text"
                     placeholder="Tu nombre"
                     required
-                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-stone-300 bg-white text-sage-900"
+                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-neutral-300 bg-white text-brand-900"
                     style={{
                       padding: '12px 14px',
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-[13px] font-medium mb-1.5 text-stone-600">
+                  <label className="block text-[13px] font-medium mb-1.5 text-neutral-600">
                     Teléfono
                   </label>
                   <input
                     type="tel"
                     placeholder="+1 (___) ___-____"
                     required
-                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-stone-300 bg-white text-sage-900"
+                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-neutral-300 bg-white text-brand-900"
                     style={{
                       padding: '12px 14px',
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-[13px] font-medium mb-1.5 text-stone-600">
+                  <label className="block text-[13px] font-medium mb-1.5 text-neutral-600">
                     ¿Cuánto necesitas?
                   </label>
                   <input
                     type="text"
                     placeholder="Ej: $2,500"
-                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-stone-300 bg-white text-sage-900"
+                    className="fondi-input w-full rounded-md text-[15px] font-sans border border-neutral-300 bg-white text-brand-900"
                     style={{
                       padding: '12px 14px',
                     }}
@@ -160,12 +160,12 @@ export function ContactSection() {
                   type="submit"
                   whileTap={{ scale: 0.97 }}
                   transition={{ duration: 0.1 }}
-                  className="text-base font-semibold rounded-md border-none cursor-pointer transition-colors duration-200 mt-1 hover:bg-sage-800 bg-sage-900 text-white"
+                  className="text-base font-semibold rounded-md border-none cursor-pointer transition-colors duration-200 mt-1 hover:bg-brand-800 bg-brand-900 text-white"
                   style={{ padding: '15px' }}
                 >
                   Solicitar mi crédito
                 </motion.button>
-                <p className="text-xs text-center m-0 text-stone-400">
+                <p className="text-xs text-center m-0 text-neutral-400">
                   Nunca enviamos spam a tu correo.
                 </p>
               </motion.form>

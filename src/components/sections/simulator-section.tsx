@@ -40,7 +40,7 @@ export function SimulatorSection() {
   return (
     <section
       id="simulador"
-      className="relative bg-sage-900"
+      className="relative bg-brand-900"
       style={{ padding: '76px 48px 120px' }}
     >
       {/* Heading — slides from left */}
@@ -51,7 +51,7 @@ export function SimulatorSection() {
         whileInView="visible"
         viewport={VP}
       >
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-sage-300">
+        <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-300">
           Simulador de crédito
         </div>
         <h2
@@ -60,7 +60,7 @@ export function SimulatorSection() {
         >
           Calcula tu crédito <span className="font-serif italic font-medium">en segundos.</span>
         </h2>
-        <p className="text-base leading-[1.6] m-0 text-sage-200" style={{ maxWidth: '440px' }}>
+        <p className="text-base leading-[1.6] m-0 text-brand-200" style={{ maxWidth: '440px' }}>
           Mueve los controles para ver tu cuota estimada. Sin compromiso.
         </p>
       </motion.div>
@@ -85,11 +85,11 @@ export function SimulatorSection() {
           <div>
             {/* Monto */}
             <div className="flex justify-between items-baseline">
-              <span className="text-sm font-medium text-stone-600">Monto</span>
+              <span className="text-sm font-medium text-neutral-600">Monto</span>
               <AnimatedCounter
                 value={monto}
                 format={fmt}
-                className="font-mono text-lg font-medium text-sage-900"
+                className="font-mono text-lg font-medium text-brand-900"
               />
             </div>
             <input
@@ -101,7 +101,7 @@ export function SimulatorSection() {
               onChange={(e) => setMonto(Number(e.target.value))}
               style={{ margin: '14px 0 4px' }}
             />
-            <div className="flex justify-between text-[11px] font-mono text-stone-400">
+            <div className="flex justify-between text-[11px] font-mono text-neutral-400">
               <span>{fmt(simulator.montoMin)}</span>
               <span>{fmt(simulator.montoMax)}</span>
             </div>
@@ -113,7 +113,7 @@ export function SimulatorSection() {
                   key={amt}
                   onClick={() => setMonto(amt)}
                   className={`font-mono text-[11.5px] font-medium px-2.5 py-1.5 rounded-full cursor-pointer transition-all duration-200 border ${
-                    monto === amt ? 'border-sage-900 bg-sage-900 text-white' : 'border-stone-300 bg-white text-stone-600'
+                    monto === amt ? 'border-brand-900 bg-brand-900 text-white' : 'border-neutral-300 bg-white text-neutral-600'
                   }`}
                 >
                   {fmt(amt)}
@@ -123,11 +123,11 @@ export function SimulatorSection() {
 
             {/* Plazo */}
             <div className="flex justify-between items-baseline mt-[22px]">
-              <span className="text-sm font-medium text-stone-600">Plazo</span>
+              <span className="text-sm font-medium text-neutral-600">Plazo</span>
               <AnimatedCounter
                 value={plazo}
                 format={fmtPlazo}
-                className="font-mono text-lg font-medium text-sage-900"
+                className="font-mono text-lg font-medium text-brand-900"
               />
             </div>
             <input
@@ -139,7 +139,7 @@ export function SimulatorSection() {
               onChange={(e) => setPlazo(Number(e.target.value))}
               style={{ margin: '14px 0 4px' }}
             />
-            <div className="flex justify-between text-[11px] font-mono text-stone-400">
+            <div className="flex justify-between text-[11px] font-mono text-neutral-400">
               <span>3 m</span>
               <span>36 m</span>
             </div>
@@ -147,18 +147,18 @@ export function SimulatorSection() {
 
           {/* Right: result */}
           <div
-            className="flex flex-col justify-center rounded-[10px] px-6 py-8 bg-sage-50"
+            className="flex flex-col justify-center rounded-[10px] px-6 py-8 bg-brand-50"
           >
-            <div className="text-[13px] tracking-[.04em] text-sage-600">
+            <div className="text-[13px] tracking-[.04em] text-brand-600">
               Cuota mensual estimada
             </div>
             <AnimatedCounter
               value={cuota}
               format={fmt}
-              className="font-serif italic mt-1.5 text-sage-900"
+              className="font-serif italic mt-1.5 text-brand-900"
               style={{ fontSize: '44px', lineHeight: 1.02 }}
             />
-            <div className="text-xs mt-2 text-stone-500">
+            <div className="text-xs mt-2 text-neutral-500">
               Total:{' '}
               <AnimatedCounter value={total} format={fmt} />
               <br />

@@ -15,11 +15,11 @@ interface ButtonProps {
 
 const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
   primary:
-    'bg-sage-900 text-white hover:bg-sage-800 transition-colors duration-200',
+    'bg-brand-900 text-white hover:bg-brand-800 transition-colors duration-200',
   accent:
-    'bg-sage-300 text-sage-900 border border-sage-300 hover:bg-sage-200 transition-colors duration-200',
+    'bg-brand-300 text-brand-900 border border-brand-300 hover:bg-brand-200 transition-colors duration-200',
   outline:
-    'bg-transparent text-sage-300 border border-sage-600 hover:border-sage-500 hover:bg-sage-900/30 transition-colors duration-200',
+    'bg-transparent text-brand-300 border border-brand-600 hover:border-brand-500 hover:bg-brand-900/30 transition-colors duration-200',
   whatsapp:
     'bg-whatsapp text-white hover:bg-whatsapp-hover transition-colors duration-200',
 }
