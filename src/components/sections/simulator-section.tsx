@@ -25,7 +25,7 @@ function calcCuota(principal: number, months: number, rate: number): number {
 // Layout-aware variant: keeps y:56 in both states so the offset isn't disturbed
 const simCardVariant = {
   hidden: { opacity: 0, x: 24, y: 56 },
-  visible: { opacity: 1, x: 0, y: 56, transition: { duration: 0.55, ease: EASE } },
+  visible: { opacity: 1, x: 0, y: 56, transition: { duration: 0.65, ease: EASE } },
 }
 
 const VP = { once: true, amount: 0.2 } as const
@@ -110,7 +110,7 @@ export function SimulatorSection() {
                 <button
                   key={amt}
                   onClick={() => setMonto(amt)}
-                  className={`font-mono text-[11.5px] font-medium px-2.5 py-1.5 rounded-full cursor-pointer transition-all duration-200 border ${
+                  className={`font-mono text-[11.5px] font-medium px-2.5 py-1.5 rounded-full cursor-pointer transition-all duration-300 border ${
                     monto === amt ? 'border-brand-900 bg-brand-900 text-white' : 'border-neutral-300 bg-white text-neutral-600'
                   }`}
                 >

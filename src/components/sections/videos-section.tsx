@@ -87,14 +87,14 @@ function VideoCard({ video, isActive, onEnter, onLeave, onOpen }: VideoCardProps
       style={{
         aspectRatio: '16/10',
         borderRadius: '10px',
-        transition: 'transform 0.2s cubic-bezier(0.2,0.8,0.2,1)',
+        transition: 'transform 0.28s cubic-bezier(0.2,0.8,0.2,1)',
         transform: isActive ? 'scale(1.02)' : 'scale(1)',
       }}
     >
       <img
         src={video.poster}
         alt={video.t}
-        className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
+        className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
         style={{
           opacity: isActive ? 0.7 : 0.85,
           filter: isActive ? 'saturate(1) brightness(0.85)' : 'saturate(0.8) brightness(0.75)',
@@ -103,7 +103,7 @@ function VideoCard({ video, isActive, onEnter, onLeave, onOpen }: VideoCardProps
       />
 
       <div
-        className="absolute left-3 bottom-3 flex items-center gap-[9px] rounded-full px-3.5 py-2 transition-all duration-200 bg-neutral-50/94"
+        className="absolute left-3 bottom-3 flex items-center gap-[9px] rounded-full px-3.5 py-2 transition-all duration-300 bg-neutral-50/94"
         style={{
           boxShadow: '0 2px 8px rgba(11, 63, 124,.15)',
           transform: isActive ? 'scale(1.05)' : 'scale(1)',
@@ -175,7 +175,7 @@ function VideoModal({ video, onClose }: VideoModalProps) {
             onClick={onClose}
             autoFocus
             aria-label="Cerrar video"
-            className="absolute -right-2 -top-2 sm:right-3 sm:top-3 flex h-11 w-11 items-center justify-center rounded-full bg-neutral-50/94 text-brand-900 transition-transform duration-150 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+            className="absolute -right-2 -top-2 sm:right-3 sm:top-3 flex h-11 w-11 items-center justify-center rounded-full bg-neutral-50/94 text-brand-900 transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             style={{ boxShadow: '0 2px 8px rgba(11, 63, 124,.2)' }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

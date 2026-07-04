@@ -69,7 +69,7 @@ export function ContactSection() {
             href={`https://wa.me/${contact.waNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 text-base font-semibold rounded-lg no-underline mb-6 transition-colors duration-200 hover:bg-whatsapp-hover bg-whatsapp text-white"
+            className="inline-flex items-center gap-2.5 text-base font-semibold rounded-lg no-underline mb-6 transition-colors duration-300 hover:bg-whatsapp-hover bg-whatsapp text-white"
             style={{ padding: '15px 24px' }}
           >
             <WaIcon />
@@ -107,7 +107,7 @@ export function ContactSection() {
                 key="success"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: EASE }}
+                transition={{ duration: 0.4, ease: EASE }}
                 className="flex flex-col items-center justify-center rounded-xl bg-white border border-neutral-200 p-6 md:p-8"
                 style={{ minHeight: '300px' }}
               >
@@ -121,7 +121,7 @@ export function ContactSection() {
               <motion.form
                 key="form"
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2, ease: EASE }}
+                transition={{ duration: 0.24, ease: EASE }}
                 onSubmit={handleSubmit}
                 noValidate
                 className="flex flex-col gap-4 rounded-xl bg-white border border-neutral-200 p-6 md:p-8"
@@ -197,8 +197,8 @@ export function ContactSection() {
                 <motion.button
                   type="submit"
                   whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.1 }}
-                  className="text-base font-semibold rounded-md border-none cursor-pointer transition-colors duration-200 mt-1 hover:bg-brand-800 bg-brand-900 text-white"
+                  transition={{ duration: 0.12 }}
+                  className="text-base font-semibold rounded-md border-none cursor-pointer transition-colors duration-300 mt-1 hover:bg-brand-800 bg-brand-900 text-white"
                   style={{ padding: '15px' }}
                 >
                   Solicitar mi crédito

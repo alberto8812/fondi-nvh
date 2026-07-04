@@ -45,7 +45,7 @@ export function StepsSection() {
             key={p.n}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: EASE, delay: i * 0.09 }}
+            transition={{ duration: 0.55, ease: EASE, delay: i * 0.1 }}
             viewport={VP}
             className={`px-6 py-7 md:px-[30px] md:py-[34px] ${i < steps.length - 1 ? 'border-b md:border-b-0 md:border-r border-neutral-200' : ''}`}
           >

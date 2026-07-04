@@ -40,7 +40,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-brand-300 hover:text-white transition-colors duration-200 no-underline"
+              className="text-sm font-medium text-brand-300 hover:text-white transition-colors duration-300 no-underline"
             >
               {link.label}
             </a>
@@ -51,7 +51,7 @@ export function Navbar() {
           {/* CTA — always visible so it's reachable even if the mobile menu's JS fails to mount */}
           <a
             href="#contacto"
-            className="inline-flex text-sm font-semibold px-3 sm:px-[18px] py-2.5 rounded-md no-underline transition-colors duration-200 bg-brand-300 text-brand-900 hover:bg-brand-400"
+            className="inline-flex text-sm font-semibold px-3 sm:px-[18px] py-2.5 rounded-md no-underline transition-colors duration-300 bg-brand-300 text-brand-900 hover:bg-brand-400"
           >
             <span className="sm:hidden">Solicitar</span>
             <span className="hidden sm:inline">Solicitar crédito →</span>
@@ -64,7 +64,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-md text-brand-300 hover:text-white transition-colors duration-200"
+            className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-md text-brand-300 hover:text-white transition-colors duration-300"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -81,7 +81,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: EASE }}
+            transition={{ duration: 0.24, ease: EASE }}
             className="md:hidden absolute left-0 right-0 top-full bg-brand-900 border-b border-brand-800"
           >
             <div className="flex flex-col px-5 py-3">
@@ -90,7 +90,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-[15px] font-medium text-brand-300 hover:text-white transition-colors duration-200 no-underline py-3 border-b border-brand-800 last:border-b-0"
+                  className="text-[15px] font-medium text-brand-300 hover:text-white transition-colors duration-300 no-underline py-3 border-b border-brand-800 last:border-b-0"
                 >
                   {link.label}
                 </a>
