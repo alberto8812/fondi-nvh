@@ -66,6 +66,12 @@ export interface VideoItem {
   url: string
 }
 
+export interface ContactQuestion {
+  id: string
+  label: string
+  type: 'text' | 'boolean'
+}
+
 export interface ContactContent {
   eyebrow: string
   headline: string
@@ -74,5 +80,11 @@ export interface ContactContent {
   phone: string
   telHref: string
   waNumber: string
+  waIntro: string
+  assistantName: string
+  assistantRole: string
+  greeting: string
+  teaser: string
+  questions: ContactQuestion[]
   email: string
 }

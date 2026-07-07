@@ -14,6 +14,7 @@ import {
   VideosSection,
   ContactSection,
 } from '@/components/sections'
+import { FloatingChatWidget } from '@/components/floating-chat-widget'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <ContactSection />
       </main>
       <Footer />
+      <FloatingChatWidget />
     </MotionConfig>
   )
 }

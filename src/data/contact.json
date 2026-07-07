@@ -6,5 +6,17 @@
   "phone": "+1 (980) 406-8356",
   "telHref": "tel:+19804068356",
   "waNumber": "19804068356",
+  "waIntro": "Hola, quiero información sobre un crédito. Mis datos:",
+  "assistantName": "Ana",
+  "assistantRole": "Asesora Fondi",
+  "greeting": "¡Hola! 👋 Soy Ana, asesora de Fondi. Te ayudo a armar tu pedido en menos de un minuto y lo paso directo a un asesor por WhatsApp. ¿Vemos qué necesitás?",
+  "teaser": "¿Buscás un crédito rápido? 💬",
+  "questions": [
+    { "id": "nombre", "label": "Tu nombre", "type": "text" },
+    { "id": "ciudad", "label": "¿En qué ciudad y estado vives?", "type": "text" },
+    { "id": "cp", "label": "¿Cuál es tu código postal?", "type": "text" },
+    { "id": "trabajoEstable", "label": "¿Tienes un trabajo estable?", "type": "boolean" },
+    { "id": "trabajo", "label": "¿En qué trabajas?", "type": "text" }
+  ],
   "email": "info@fondi.us"
 }

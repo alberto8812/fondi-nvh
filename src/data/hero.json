@@ -3,7 +3,13 @@
   "headline": "El dinero que necesitas,",
   "headlineItalic": "cuando más lo necesitas.",
   "subline": "Desembolso en menos de 24 horas. Sin fiador, sin papeleo — solo con tu pasaporte.",
-  "ctaPrimary": { "label": "Elegí tu monto", "href": "#montos" },
-  "ctaWhatsApp": { "label": "WhatsApp", "href": "https://wa.me/19804068356" },
+  "ctaPrimary": {
+    "label": "Elegí tu monto",
+    "href": "#montos"
+  },
+  "ctaWhatsApp": {
+    "label": "WhatsApp",
+    "href": "https://wa.me/19804068356"
+  },
   "bgVideo": "/images/hero-bg.mp4"
 }
