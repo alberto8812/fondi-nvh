@@ -31,4 +31,4 @@ export const services = servicesRaw satisfies Service[]
 export const about = aboutRaw satisfies AboutContent
 export const testimonials = testimonialsRaw satisfies Testimonial[]
 export const videos = videosRaw satisfies VideoItem[]
-export const contact = contactRaw satisfies ContactContent
+export const contact = contactRaw as ContactContent

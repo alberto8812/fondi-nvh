@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace TUDOMINIO.com with the final domain
+Sitemap: https://TUDOMINIO.com/sitemap.xml
