@@ -1,124 +1,147 @@
-import { useState } from 'react'
-import { motion } from 'motion/react'
-import { simulator } from '@/data'
-import { AnimatedCounter } from '@/components/motion'
-import { slideInLeft, EASE } from '@/components/motion'
-import { Button } from '@/components/ui'
+import { useState } from "react";
+import { motion } from "motion/react";
+import { simulator } from "@/data";
+import { AnimatedCounter } from "@/components/motion";
+import { slideInLeft, EASE } from "@/components/motion";
+import { Button } from "@/components/ui";
 
 function fmt(n: number): string {
-  return new Intl.NumberFormat('es-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("es-US", {
+    style: "currency",
+    currency: "USD",
     maximumFractionDigits: 0,
-  }).format(n)
+  }).format(n);
 }
 
 // Layout-aware variant: keeps y:56 in both states so the offset isn't disturbed
 const cardVariant = {
   hidden: { opacity: 0, x: 24, y: 56 },
-  visible: { opacity: 1, x: 0, y: 56, transition: { duration: 0.65, ease: EASE } },
-}
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 56,
+    transition: { duration: 0.65, ease: EASE },
+  },
+};
 
-const VP = { once: true, amount: 0.2 } as const
+const VP = { once: true, amount: 0.2 } as const;
 
 export function AmountSelectorSection() {
-  const [monto, setMonto] = useState(simulator.quickAmounts[0])
+  const [monto, setMonto] = useState(simulator.quickAmounts[0]);
 
   const waHref = `https://wa.me/${simulator.waNumber}?text=${encodeURIComponent(
-    `Hola, quiero solicitar un crédito de ${fmt(monto)}`
-  )}`
+    `Hola, quiero solicitar un crédito de ${fmt(monto)}`,
+  )}`;
 
   return (
     <section
       id="montos"
       className="relative bg-brand-900 px-5 sm:px-8 md:px-12 pt-14 pb-16 md:pt-[76px] md:pb-[120px]"
     >
-      {/* Heading — slides from left */}
-      <motion.div
-        style={{ maxWidth: '520px' }}
-        variants={slideInLeft}
-        initial="hidden"
-        whileInView="visible"
-        viewport={VP}
-      >
-        <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-300">
-          Montos disponibles
-        </div>
-        <h2
-          className="font-sans font-semibold mt-[14px] mb-4 text-white"
-          style={{ fontSize: 'clamp(26px, 6vw, 34px)', letterSpacing: '-0.02em', lineHeight: 1.12, textWrap: 'balance' }}
+      <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-[440px_1fr] lg:items-center lg:gap-16">
+        {/* Heading — slides from left */}
+        <motion.div
+          variants={slideInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VP}
         >
-          Elegí el monto <span className="font-serif italic font-medium">que necesitás.</span>
-        </h2>
-        <p className="text-base leading-[1.6] m-0 text-brand-200" style={{ maxWidth: '440px' }}>
-          Seleccioná un monto y te asesoramos por WhatsApp en minutos. Sin tasas de ejemplo, sin compromiso.
-        </p>
-      </motion.div>
-
-      {/* Floating selector card — slides from right, y:56 maintained */}
-      <motion.div
-        variants={cardVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={VP}
-        className="bg-white p-6 md:p-9"
-        style={{
-          maxWidth: '640px',
-          margin: '32px auto 0',
-          borderRadius: '12px',
-          boxShadow: '0 30px 60px -18px rgba(11,63,124,.35), 0 8px 24px rgba(11,63,124,.12)',
-        }}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left: amount pills */}
-          <div>
-            <span className="text-sm font-medium text-neutral-600">Monto</span>
-            <div className="flex gap-2 mt-3 flex-wrap">
-              {simulator.quickAmounts.map((amt) => (
-                <button
-                  key={amt}
-                  onClick={() => setMonto(amt)}
-                  className={`font-mono text-sm font-medium px-4 py-2.5 rounded-full cursor-pointer transition-all duration-300 border ${
-                    monto === amt ? 'border-brand-900 bg-brand-900 text-white' : 'border-neutral-300 bg-white text-neutral-600'
-                  }`}
-                >
-                  {fmt(amt)}
-                </button>
-              ))}
-            </div>
-            <p className="text-[13px] leading-[1.6] mt-4 text-neutral-500">
-              ¿Necesitás otro monto? Contanos por WhatsApp y te asesoramos.
-            </p>
+          <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-300">
+            Montos disponibles
           </div>
-
-          {/* Right: confirmation + CTA */}
-          <div
-            className="flex flex-col justify-center rounded-[10px] px-6 py-8 bg-brand-50 border border-accent-500/50"
+          <h2
+            className="font-sans font-semibold mt-[14px] mb-4 text-white"
+            style={{
+              fontSize: "clamp(26px, 6vw, 34px)",
+              letterSpacing: "-0.02em",
+              lineHeight: 1.12,
+              textWrap: "balance",
+            }}
           >
-            <div className="text-[13px] tracking-[.04em] text-brand-600">
-              Monto seleccionado
+            Elegí el monto{" "}
+            <span className="font-serif italic font-medium">que necesitás.</span>
+          </h2>
+          <p
+            className="text-base leading-[1.6] m-0 text-brand-200"
+            style={{ maxWidth: "440px" }}
+          >
+            Seleccioná un monto y te asesoramos por WhatsApp en minutos. Sin
+            tasas de ejemplo, sin compromiso.
+          </p>
+        </motion.div>
+
+        {/* Floating selector card — slides from right, y:56 maintained */}
+        <motion.div
+          variants={cardVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VP}
+          className="bg-white p-6 md:p-9 mt-8 lg:mt-0 w-full lg:max-w-[620px]"
+          style={{
+            borderRadius: "12px",
+            boxShadow:
+              "0 30px 60px -18px rgba(11,63,124,.35), 0 8px 24px rgba(11,63,124,.12)",
+          }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Left: amount pills */}
+            <div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-sm font-medium text-neutral-600 shrink-0">
+                  Monto
+                </span>
+                <div className="flex gap-2 flex-wrap">
+                  {simulator.quickAmounts.map((amt) => (
+                    <button
+                      key={amt}
+                      onClick={() => setMonto(amt)}
+                      className={`font-mono text-sm font-medium px-4 py-2.5 rounded-full cursor-pointer transition-all duration-300 border ${
+                        monto === amt
+                          ? "border-brand-900 bg-brand-900 text-white"
+                          : "border-neutral-300 bg-white text-neutral-600"
+                      }`}
+                    >
+                      {fmt(amt)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <p className="text-[13px] leading-[1.6] mt-4 text-neutral-500">
+                ¿Necesitás otro monto? Contanos por WhatsApp y te asesoramos.
+              </p>
             </div>
-            <AnimatedCounter
-              value={monto}
-              format={fmt}
-              className="font-serif italic mt-1.5 text-brand-900"
-              style={{ fontSize: 'clamp(32px, 8vw, 44px)', lineHeight: 1.02, fontVariantNumeric: 'tabular-nums' }}
-            />
-            <div className="text-xs mt-2 text-neutral-500">
-              Sin tasa de ejemplo. Confirmamos las condiciones por WhatsApp.
+
+            {/* Right: confirmation + CTA */}
+            <div className="flex flex-col justify-center rounded-[10px] px-6 py-8 bg-brand-50 border border-accent-500/50">
+              <div className="text-[13px] tracking-[.04em] text-brand-600">
+                Monto seleccionado
+              </div>
+              <AnimatedCounter
+                value={monto}
+                format={fmt}
+                className="font-serif italic mt-1.5 text-brand-900"
+                style={{
+                  fontSize: "clamp(32px, 8vw, 44px)",
+                  lineHeight: 1.02,
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              />
+              <div className="text-xs mt-2 text-neutral-500">
+                Sin tasa de ejemplo. Confirmamos las condiciones por WhatsApp.
+              </div>
+              <Button
+                variant="whatsapp"
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-[18px] justify-center w-full"
+              >
+                Solicitar por WhatsApp
+              </Button>
             </div>
-            <Button
-              variant="whatsapp"
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-[18px] justify-center w-full"
-            >
-              Solicitar por WhatsApp
-            </Button>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
-  )
+  );
 }

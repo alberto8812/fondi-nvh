@@ -1,11 +1,16 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion } from 'motion/react'
 import { testimonials } from '@/data'
-import { fadeUp } from '@/components/motion'
+import { fadeUp, EASE } from '@/components/motion'
 
 const VP = { once: true, amount: 0.2 } as const
 const CARD_WIDTH = 340
 const CARD_GAP = 20
+
+const cardFade = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE } },
+}
 
 export function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -93,11 +98,11 @@ export function TestimonialsSection() {
                 width: CARD_WIDTH,
                 minHeight: 232,
               }}
-              variants={fadeUp}
+              variants={cardFade}
               initial="hidden"
               whileInView="visible"
               viewport={VP}
-              transition={{ delay: Math.min(i, 5) * 0.05 }}
+              transition={{ duration: 0.35, ease: EASE, delay: Math.min(i, 5) * 0.05 }}
             >
               <div className="flex justify-between items-start">
                 <div className="text-status-amber" style={{ fontSize: '14px', letterSpacing: '3px' }}>
