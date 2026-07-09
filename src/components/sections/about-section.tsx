@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { about } from '@/data'
-import { Button } from '@/components/ui'
-import { slideInLeft, slideInRight } from '@/components/motion'
+import { Button, Icon } from '@/components/ui'
+import { fadeUp, slideInLeft, slideInRight, staggerContainer, staggerItem } from '@/components/motion'
 
 const VP = { once: true, amount: 0.25 } as const
 
@@ -34,7 +34,7 @@ export function AboutSection() {
         >
           {about.body}
         </p>
-        <Button variant="outline" href={about.cta.href}>
+        <Button variant="accent" href={about.cta.href}>
           {about.cta.label}
         </Button>
       </motion.div>
@@ -54,6 +54,50 @@ export function AboutSection() {
           style={{ filter: 'saturate(0.88) contrast(1.02)' }}
           loading="lazy"
         />
+      </motion.div>
+
+      {/* Values — full width, stagger */}
+      <motion.div
+        className="col-span-1 md:col-span-2 mt-10 md:mt-14 pt-10 md:pt-12 border-t border-white/10"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VP}
+      >
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VP}
+        >
+          {about.values.map((v) => (
+            <motion.div
+              key={v.title}
+              variants={staggerItem}
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+            >
+              <div
+                className="flex items-center justify-center bg-brand-300/15 text-brand-300 ring-1 ring-inset ring-brand-300/20"
+                style={{ width: '46px', height: '46px', borderRadius: '9px' }}
+              >
+                <Icon name={v.icon} size={22} />
+              </div>
+              <h3
+                className="font-sans font-semibold text-white"
+                style={{ fontSize: '16px', letterSpacing: '-0.01em', margin: '16px 0 6px' }}
+              >
+                {v.title}
+              </h3>
+              <p
+                className="text-[14px] leading-[1.55] m-0 text-brand-200"
+                style={{ textWrap: 'pretty' }}
+              >
+                {v.text}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
     </section>
   )

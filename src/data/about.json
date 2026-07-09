@@ -1,7 +1,29 @@
 {
   "eyebrow": "Nosotros",
   "headline": "Creemos que el acceso al crédito debe ser justo y humano.",
-  "body": "En Fondi acompañamos a personas que los bancos tradicionales dejan fuera. Sin requisitos imposibles, con procesos transparentes y trato cercano en cada paso.",
+  "body": "En Fondi acompañamos a personas que los bancos tradicionales dejan fuera, aportando así al crecimiento económico de cada comunidad a la que llegamos. Sin requisitos imposibles, con procesos transparentes y trato cercano en cada paso.",
   "cta": { "label": "Conócenos →", "href": "#contacto" },
-  "image": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=70"
+  "image": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=70",
+  "values": [
+    {
+      "icon": "shield",
+      "title": "Honestidad",
+      "text": "Comunicación clara y transparente en cada paso del proceso."
+    },
+    {
+      "icon": "handshake",
+      "title": "Confianza",
+      "text": "Tus datos y tu dinero están protegidos en cada operación."
+    },
+    {
+      "icon": "badge",
+      "title": "Responsabilidad",
+      "text": "Asumimos con seriedad el compromiso de darte el mejor servicio."
+    },
+    {
+      "icon": "users",
+      "title": "Inclusión",
+      "text": "Productos ajustados a la necesidad real de cada cliente."
+    }
+  ]
 }

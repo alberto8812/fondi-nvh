@@ -52,6 +52,7 @@ export interface AboutContent {
   body: string
   cta: { label: string; href: string }
   image: string
+  values: { icon: string; title: string; text: string }[]
 }
 
 export interface Testimonial {
