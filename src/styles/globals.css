@@ -63,7 +63,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-brand-900);
+  background: var(--color-brand-900) url("/images/hero-bg-poster.jpg") no-repeat top center / cover;
   color: #fff;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
