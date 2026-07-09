@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { hero } from "@/data";
 import { Button } from "@/components/ui";
@@ -19,13 +19,16 @@ const beat = (delay: number) => ({
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.muted = true;
     video.play().catch(() => {
-      // Autoplay blocked (e.g. iOS Low Power Mode / Android Data Saver) — poster stays visible.
+      // Autoplay blocked (e.g. WhatsApp in-app browser, iOS Low Power Mode, Android Data Saver).
+      // Fall back to a plain <img> so no native tap-to-play affordance shows up.
+      setAutoplayBlocked(true);
     });
   }, []);
 
@@ -35,17 +38,26 @@ export function HeroSection() {
       className="relative overflow-hidden bg-brand-900 flex items-center min-h-[clamp(520px,42vw,720px)]"
     >
       {/* Background video */}
-      <video
-        ref={videoRef}
-        src={hero.bgVideo}
-        poster="/images/hero-bg-poster.jpg"
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover lg:object-[50%_25%]"
-        style={{ filter: "saturate(0.9)" }}
-        autoPlay
-        muted
-        playsInline
-      />
+      {autoplayBlocked ? (
+        <img
+          src="/images/hero-bg-poster.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover lg:object-[50%_25%]"
+          style={{ filter: "saturate(0.9)" }}
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={hero.bgVideo}
+          poster="/images/hero-bg-poster.jpg"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover lg:object-[50%_25%]"
+          style={{ filter: "saturate(0.9)" }}
+          autoPlay
+          muted
+          playsInline
+        />
+      )}
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-brand-900/50 from-10% via-brand-900/50 via-25% to-transparent to-85% pointer-events-none" />
