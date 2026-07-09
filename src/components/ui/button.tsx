@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 interface ButtonProps {
-  variant?: 'primary' | 'accent' | 'outline' | 'whatsapp'
+  variant?: 'primary' | 'accent' | 'outline' | 'whatsapp' | 'solid' | 'whatsapp-outline'
   size?: 'md' | 'lg'
   icon?: ReactNode
   href?: string
@@ -22,6 +22,10 @@ const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
     'bg-transparent text-brand-300 border border-brand-600 hover:border-brand-500 hover:bg-brand-900/30 transition-colors duration-300',
   whatsapp:
     'bg-whatsapp text-white hover:bg-whatsapp-hover transition-colors duration-300',
+  solid:
+    'bg-white text-brand-900 border border-white hover:bg-brand-100 transition-colors duration-300',
+  'whatsapp-outline':
+    'bg-transparent text-whatsapp border border-whatsapp hover:bg-whatsapp/10 transition-colors duration-300',
 }
 
 const sizes: Record<NonNullable<ButtonProps['size']>, string> = {

@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { hero } from "@/data";
 import { Button } from "@/components/ui";
 import { EASE } from "@/components/motion";
+import { openFondiChat } from "@/lib/chat-bridge";
 
 const WaIcon = () => (
   <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
@@ -24,7 +25,7 @@ export function HeroSection() {
       {/* Background video */}
       <video
         src={hero.bgVideo}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover lg:object-[50%_25%]"
         style={{ filter: "saturate(0.9)" }}
         autoPlay
         muted
@@ -82,15 +83,13 @@ export function HeroSection() {
           {...beat(0.5)}
           className="flex flex-col sm:flex-row gap-3 mt-9"
         >
-          <Button variant="accent" size="lg" href={hero.ctaPrimary.href}>
+          <Button variant="solid" size="lg" href={hero.ctaPrimary.href}>
             {hero.ctaPrimary.label}
           </Button>
           <Button
-            variant="whatsapp"
+            variant="whatsapp-outline"
             size="lg"
-            href={hero.ctaWhatsApp.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={openFondiChat}
             icon={<WaIcon />}
           >
             {hero.ctaWhatsApp.label}
