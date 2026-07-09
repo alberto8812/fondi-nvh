@@ -61,6 +61,10 @@ accent-700 #339997
 - **Range slider thumb** — bg `brand-900`, white border, shadow `rgba(11,63,124,.25)`.
 - **Hero gradient overlay** — `linear-gradient(90deg, rgba(11,63,124,.96) 0%, rgba(11,63,124,.82) 45%, rgba(11,63,124,.5) 100%)` — always brand-900 in rgba form, never a literal unrelated hex.
 
+## Key component patterns — testimonials
+
+- **Testimonios (`testimonials-section.tsx`)** — grid 2x2 reemplazada por scroll horizontal nativo (`overflow-x-auto snap-x snap-mandatory`, sin librería de carrusel) porque escala a 8+ testimonios sin esconder contenido detrás de un slide único. Card fija `340px` + gap `20px`. Señales de "hay más": fade de borde (`gradient-to-r/l from-white`) en vez de flechas obligatorias, más un hairline de progreso (`h-[3px]`, `bg-brand-900` sobre `bg-neutral-200`) que reemplaza los dots de paginación — informa posición real, no decoración. Flechas prev/next (circulares, `border-neutral-200`, ícono `brand-900`) solo aparecen en `sm:` y solo si hay overflow (`scrollWidth > clientWidth`); se ocultan automáticamente si en algún momento vuelve a haber pocos testimonios y todo entra en una fila. Region con `tabIndex={0}` + `role="region"` para scroll por teclado.
+
 ## Rule going forward
 
 Any new dark-tint rgba literal in this codebase must use `11, 63, 124` (brand-900), never introduce a new arbitrary dark color. Any new light neutral background should pull from the `neutral-*` scale, not a fresh gray. If Evalia issues additional official brand hexes later, treat them as new exact anchors and re-derive only the interpolated steps between them — don't touch the three existing exact anchors (`brand-400/600/900`) or `neutral-200`/`accent-300` without an explicit brand-manual update.
