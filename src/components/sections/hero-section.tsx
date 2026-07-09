@@ -25,6 +25,8 @@ export function HeroSection() {
       {/* Background video */}
       <video
         src={hero.bgVideo}
+        poster="/images/hero-bg-poster.jpg"
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover lg:object-[50%_25%]"
         style={{ filter: "saturate(0.9)" }}
         autoPlay
