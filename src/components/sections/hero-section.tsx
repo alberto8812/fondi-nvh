@@ -25,17 +25,14 @@ export function HeroSection() {
       <video
         src={hero.bgVideo}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          opacity: 0.55,
-          filter: "saturate(0.85)",
-        }}
+        style={{ filter: "saturate(0.9)" }}
         autoPlay
         muted
         playsInline
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-900/50 from-10% via-brand-900/50 via-25% to-transparent to-85%" />
 
       {/* Content */}
       <div className="relative w-full px-5 sm:px-8 md:px-12 pt-16 pb-14 md:pt-24 md:pb-[104px] max-w-[640px]">
