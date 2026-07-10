@@ -73,6 +73,7 @@ interface ChatState {
   inputValue: string
   typing: boolean
   done: boolean
+  monto?: string
 }
 
 const INITIAL_STATE: ChatState = {
@@ -98,7 +99,10 @@ export function FloatingChatWidget() {
   }, [])
 
   useEffect(() => {
-    const openFromEvent = () => setChat((prev) => ({ ...prev, open: true, teaser: 'dismissed' }))
+    const openFromEvent = (e: Event) => {
+      const monto = (e as CustomEvent<{ monto?: string }>).detail?.monto
+      setChat((prev) => ({ ...prev, open: true, teaser: 'dismissed', monto: monto ?? prev.monto }))
+    }
     window.addEventListener(CHAT_OPEN_EVENT, openFromEvent)
     return () => window.removeEventListener(CHAT_OPEN_EVENT, openFromEvent)
   }, [])
@@ -133,6 +137,7 @@ export function FloatingChatWidget() {
   const waText = [
     contact.waIntro,
     '',
+    ...(chat.monto ? [`Monto solicitado: ${chat.monto}`, ''] : []),
     ...questions.map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
   ].join('\n')
   const waHref = `https://wa.me/${contact.waNumber}?text=${encodeURIComponent(waText)}`
@@ -184,6 +189,12 @@ export function FloatingChatWidget() {
                     Revisá tus respuestas antes de enviarlas:
                   </p>
                   <ul className="flex flex-col gap-2 mb-4 text-[13.5px] text-neutral-600" style={{ paddingLeft: 0, listStyle: 'none' }}>
+                    {chat.monto && (
+                      <li className="flex flex-col gap-0.5 pb-2 border-b border-neutral-100">
+                        <span className="text-[11.5px] text-neutral-400">Monto solicitado</span>
+                        <span className="text-brand-900 font-medium">{chat.monto}</span>
+                      </li>
+                    )}
                     {questions.map((q) => (
                       <li key={q.id} className="flex flex-col gap-0.5 pb-2 border-b border-neutral-100 last:border-0">
                         <span className="text-[11.5px] text-neutral-400">{q.label}</span>

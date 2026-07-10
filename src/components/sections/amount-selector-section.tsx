@@ -4,6 +4,7 @@ import { simulator } from "@/data";
 import { AnimatedCounter } from "@/components/motion";
 import { slideInLeft, EASE } from "@/components/motion";
 import { Button } from "@/components/ui";
+import { openFondiChat } from "@/lib/chat-bridge";
 
 function fmt(n: number): string {
   return new Intl.NumberFormat("es-US", {
@@ -28,10 +29,6 @@ const VP = { once: true, amount: 0.2 } as const;
 
 export function AmountSelectorSection() {
   const [monto, setMonto] = useState(simulator.quickAmounts[0]);
-
-  const waHref = `https://wa.me/${simulator.waNumber}?text=${encodeURIComponent(
-    `Hola, quiero solicitar un crédito de ${fmt(monto)}`,
-  )}`;
 
   return (
     <section
@@ -130,9 +127,7 @@ export function AmountSelectorSection() {
               </div>
               <Button
                 variant="whatsapp"
-                href={waHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => openFondiChat({ monto: fmt(monto) })}
                 className="mt-[18px] justify-center w-full"
               >
                 Solicitar por WhatsApp
