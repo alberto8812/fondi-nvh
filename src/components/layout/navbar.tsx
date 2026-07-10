@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { Link, useLocation } from 'react-router-dom'
 import { EASE } from '@/components/motion'
 
+// Navbar lives in the shared Layout and persists across routes, so every
+// in-page anchor needs the leading "/" to keep resolving to the home sections
+// (e.g. from /careers) instead of appending the hash to the current route.
 const NAV_LINKS = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Cómo funciona', href: '#como-funciona' },
-  { label: 'Montos', href: '#montos' },
-  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Servicios', href: '/#servicios' },
+  { label: 'Cómo funciona', href: '/#como-funciona' },
+  { label: 'Montos', href: '/#montos' },
+  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Trabajá con nosotros', href: '/careers' },
 ] as const
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [overHero, setOverHero] = useState(true)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     if (!open) return
@@ -24,16 +30,22 @@ export function Navbar() {
 
   useEffect(() => {
     const hero = document.getElementById('hero')
-    if (!hero) return
+    if (!hero) {
+      setOverHero(false)
+      return
+    }
     const observer = new IntersectionObserver(
       ([entry]) => setOverHero(entry.isIntersecting),
       { rootMargin: '-71px 0px 0px 0px', threshold: 0 },
     )
     observer.observe(hero)
     return () => observer.disconnect()
-  }, [])
+    // Navbar persists across route changes (it lives in the shared Layout), but
+    // #hero belongs to HomePage and unmounts/remounts with the route — re-run on
+    // pathname change so the observer always targets the current #hero node.
+  }, [pathname])
 
-  const transparent = overHero && !open
+  const transparent = pathname === '/' && overHero && !open
 
   return (
     <header
@@ -45,37 +57,37 @@ export function Navbar() {
     >
       <div className="h-[70px] flex items-center justify-between px-5 sm:px-8 md:px-10">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-[9px] no-underline">
+        <Link to="/#hero" className="flex items-center gap-[9px] no-underline">
           <span className="inline-flex w-[30px] h-[30px] rounded-[7px] items-center justify-center bg-brand-300">
             <img src="/images/logo-icon.png" alt="" className="w-[21px] h-[21px] object-contain" />
           </span>
           <span className="font-sans font-bold text-[19px] tracking-[.02em] text-white">
             FONDI
           </span>
-        </a>
+        </Link>
 
         {/* Nav links — desktop */}
         <nav className="hidden md:flex gap-[30px] items-center">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="text-sm font-medium text-brand-300 hover:text-white transition-colors duration-300 no-underline"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
           {/* CTA — always visible so it's reachable even if the mobile menu's JS fails to mount */}
-          <a
-            href="#contacto"
+          <Link
+            to="/#contacto"
             className="inline-flex text-sm font-semibold px-3 sm:px-[18px] py-2.5 rounded-md no-underline transition-colors duration-300 bg-brand-300 text-brand-900 hover:bg-brand-400"
           >
             <span className="sm:hidden">Solicitar</span>
             <span className="hidden sm:inline">Solicitar crédito →</span>
-          </a>
+          </Link>
 
           {/* Hamburger — mobile only */}
           <button
@@ -106,14 +118,14 @@ export function Navbar() {
           >
             <div className="flex flex-col px-5 py-3">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setOpen(false)}
                   className="text-[15px] font-medium text-brand-300 hover:text-white transition-colors duration-300 no-underline py-3 border-b border-brand-800 last:border-b-0"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.nav>
