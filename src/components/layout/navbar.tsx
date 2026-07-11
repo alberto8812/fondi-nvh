@@ -1,69 +1,70 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import { Link, useLocation } from 'react-router-dom'
-import { EASE } from '@/components/motion'
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Link, useLocation } from "react-router-dom";
+import { EASE } from "@/components/motion";
 
 // Navbar lives in the shared Layout and persists across routes, so every
 // in-page anchor needs the leading "/" to keep resolving to the home sections
 // (e.g. from /careers) instead of appending the hash to the current route.
 const NAV_LINKS = [
-  { label: 'Servicios', href: '/#servicios' },
-  { label: 'Cómo funciona', href: '/#como-funciona' },
-  { label: 'Montos', href: '/#montos' },
-  { label: 'Nosotros', href: '/#nosotros' },
-  { label: 'Trabajá con nosotros', href: '/careers' },
-] as const
+  { label: "Servicios", href: "/#servicios" },
+  { label: "Cómo funciona", href: "/#como-funciona" },
+  { label: "Montos", href: "/#montos" },
+  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Trabajá con nosotros", href: "/careers" },
+] as const;
 
 export function Navbar() {
-  const [open, setOpen] = useState(false)
-  const [overHero, setOverHero] = useState(true)
-  const { pathname } = useLocation()
+  const [open, setOpen] = useState(false);
+  const [overHero, setOverHero] = useState(true);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [open])
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   useEffect(() => {
-    const hero = document.getElementById('hero')
+    const hero = document.getElementById("hero");
     if (!hero) {
-      setOverHero(false)
-      return
+      setOverHero(false);
+      return;
     }
     const observer = new IntersectionObserver(
       ([entry]) => setOverHero(entry.isIntersecting),
-      { rootMargin: '-71px 0px 0px 0px', threshold: 0 },
-    )
-    observer.observe(hero)
-    return () => observer.disconnect()
+      { rootMargin: "-71px 0px 0px 0px", threshold: 0 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
     // Navbar persists across route changes (it lives in the shared Layout), but
     // #hero belongs to HomePage and unmounts/remounts with the route — re-run on
     // pathname change so the observer always targets the current #hero node.
-  }, [pathname])
+  }, [pathname]);
 
-  const transparent = pathname === '/' && overHero && !open
+  const transparent = pathname === "/" && overHero && !open;
 
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
         transparent
-          ? 'bg-transparent border-b border-transparent'
-          : 'bg-brand-900 border-b border-brand-800'
+          ? "bg-transparent border-b border-transparent"
+          : "bg-brand-900 border-b border-brand-800"
       }`}
     >
       <div className="h-[70px] flex items-center justify-between px-5 sm:px-8 md:px-10">
-        {/* Logo */}
-        <Link to="/#hero" className="flex items-center gap-[9px] no-underline">
-          <span className="inline-flex w-[30px] h-[30px] rounded-[7px] items-center justify-center bg-brand-300">
-            <img src="/images/logo-icon.png" alt="" className="w-[21px] h-[21px] object-contain" />
-          </span>
-          <span className="font-sans font-bold text-[19px] tracking-[.02em] text-white">
-            FONDI
-          </span>
+        {/* Logo — larger over the transparent hero, settles smaller once the solid bar takes over */}
+        <Link to="/#hero" className="flex items-center no-underline">
+          <img
+            src="/images/balck-logo.png"
+            alt="Fondi"
+            className={`w-auto object-contain transition-[height] duration-300 ${
+              transparent ? "h-15" : "h-10"
+            }`}
+          />
         </Link>
 
         {/* Nav links — desktop */}
@@ -92,14 +93,26 @@ export function Navbar() {
           {/* Hamburger — mobile only */}
           <button
             type="button"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
             className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-md text-brand-300 hover:text-white transition-colors duration-300"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
             </svg>
           </button>
         </div>
@@ -132,5 +145,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }

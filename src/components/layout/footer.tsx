@@ -11,14 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-[9px]">
-              <span
-                className="inline-flex w-[30px] h-[30px] rounded-[7px] items-center justify-center bg-brand-300"
-              >
-                <img src="/images/logo-icon.png" alt="" className="w-[21px] h-[21px] object-contain" />
-              </span>
-              <span className="font-sans font-bold text-[19px] text-white">FONDI</span>
-            </div>
+            <img src="/images/balck-logo.png" alt="Fondi" className="h-[26px] w-auto object-contain" />
             <p className="font-serif italic text-[19px] mt-[18px] max-w-[340px] leading-[1.45] text-brand-200">
               Estamos aquí para apoyarte cuando más lo necesitas.
             </p>
