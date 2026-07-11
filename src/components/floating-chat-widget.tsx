@@ -130,25 +130,21 @@ export function FloatingChatWidget() {
     let cancelled = false
     let pollId: ReturnType<typeof setInterval> | null = null
 
-    const renderWidget = () => {
-      if (cancelled || !turnstileContainerRef.current || !window.turnstile) return
+    const tryRenderWidget = () => {
+      if (cancelled || !turnstileContainerRef.current || !window.turnstile) return false
       const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
-      if (!siteKey) return
+      if (!siteKey) return false
       turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
         sitekey: siteKey,
         callback: (token) => setChat((prev) => ({ ...prev, turnstileToken: token })),
         'expired-callback': () => setChat((prev) => ({ ...prev, turnstileToken: null })),
       })
+      return true
     }
 
-    if (window.turnstile) {
-      renderWidget()
-    } else {
+    if (!tryRenderWidget()) {
       pollId = setInterval(() => {
-        if (window.turnstile) {
-          if (pollId) clearInterval(pollId)
-          renderWidget()
-        }
+        if (tryRenderWidget() && pollId) clearInterval(pollId)
       }, 150)
     }
 
