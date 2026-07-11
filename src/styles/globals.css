@@ -210,3 +210,50 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(11, 63, 124, 0);
   }
 }
+
+/* Job detail modal — native <dialog>, same open/close mechanism as .video-modal */
+.job-modal {
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: min(560px, 92vw);
+  width: 100%;
+  margin: auto;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.28s var(--ease-out),
+    transform 0.28s var(--ease-out),
+    overlay 0.28s var(--ease-out) allow-discrete,
+    display 0.28s var(--ease-out) allow-discrete;
+}
+
+.job-modal[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .job-modal[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.job-modal::backdrop {
+  background: rgba(11, 63, 124, 0);
+  transition:
+    background 0.28s var(--ease-out),
+    overlay 0.28s var(--ease-out) allow-discrete,
+    display 0.28s var(--ease-out) allow-discrete;
+}
+
+.job-modal[open]::backdrop {
+  background: rgba(11, 63, 124, 0.55);
+}
+
+@starting-style {
+  .job-modal[open]::backdrop {
+    background: rgba(11, 63, 124, 0);
+  }
+}

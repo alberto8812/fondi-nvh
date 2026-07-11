@@ -3,18 +3,25 @@
     "title": "Asesor/a de créditos",
     "modality": "Presencial",
     "location": "Buenos Aires, Argentina",
-    "description": "Asesorá a clientes en la elección del crédito ideal, acompañándolos durante todo el proceso de solicitud y aprobación."
+    "description": "Asesorá a clientes en la elección del crédito ideal, acompañándolos durante todo el proceso de solicitud y aprobación.",
+    "active": true,
+    "publishedAt": "2026-06-15",
+    "salary": "$800.000 - $1.200.000 ARS"
   },
   {
     "title": "Coordinador/a de sucursal",
     "modality": "Presencial",
     "location": "Córdoba, Argentina",
-    "description": "Coordiná el equipo de asesores de tu sucursal, asegurando el cumplimiento de objetivos y la calidad de atención al cliente."
+    "description": "Coordiná el equipo de asesores de tu sucursal, asegurando el cumplimiento de objetivos y la calidad de atención al cliente.",
+    "active": true,
+    "publishedAt": "2026-05-28"
   },
   {
     "title": "Coordinador/a de operaciones",
     "modality": "Híbrido",
     "location": "Rosario, Argentina",
-    "description": "Supervisá los procesos operativos y de backoffice, optimizando tiempos de respuesta y experiencia del cliente."
+    "description": "Supervisá los procesos operativos y de backoffice, optimizando tiempos de respuesta y experiencia del cliente.",
+    "active": true,
+    "publishedAt": "2026-07-01"
   }
 ]

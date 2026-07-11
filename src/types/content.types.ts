@@ -78,6 +78,9 @@ export interface JobOpening {
   modality: string
   location: string
   description: string
+  active: boolean
+  publishedAt: string
+  salary?: string
 }
 
 export interface ContactContent {

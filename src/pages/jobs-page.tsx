@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
-import { jobs } from '@/data'
+import { jobs, contact } from '@/data'
 import { Icon, Button } from '@/components/ui'
 import { fadeUp, slideInLeft, slideInRight, staggerContainer, staggerItem } from '@/components/motion'
 import { openFondiChat } from '@/lib/chat-bridge'
+import { JobModal } from '@/components/job-modal'
+import type { JobOpening } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
 
@@ -25,6 +28,9 @@ const WHY_FONDI = [
 ]
 
 export function JobsPage() {
+  const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null)
+  const activeJobs = jobs.filter((job) => job.active)
+
   return (
     <main>
       <section
@@ -122,7 +128,7 @@ export function JobsPage() {
             Búsquedas abiertas
           </div>
 
-          {jobs.length === 0 ? (
+          {activeJobs.length === 0 ? (
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -147,11 +153,13 @@ export function JobsPage() {
               whileInView="visible"
               viewport={VP}
             >
-              {jobs.map((job, index) => (
-                <motion.div
+              {activeJobs.map((job, index) => (
+                <motion.button
                   key={index}
+                  type="button"
+                  onClick={() => setSelectedJob(job)}
                   variants={staggerItem}
-                  className="fondi-card flex flex-col bg-white border border-neutral-200 p-6 md:p-[30px]"
+                  className="fondi-card flex flex-col text-left bg-white border border-neutral-200 p-6 md:p-[30px] cursor-pointer"
                   style={{ borderRadius: '10px' }}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -177,17 +185,24 @@ export function JobsPage() {
                     {job.description}
                   </p>
 
-                  <div className="flex justify-end mt-5 pt-5 border-t border-neutral-200">
-                    <Button variant="primary" onClick={() => openFondiChat()}>
-                      Postularme
-                    </Button>
+                  <div className="flex flex-col gap-2 mt-5 pt-5 border-t border-neutral-200">
+                    <div className="flex items-center gap-2.5 text-[13px] text-neutral-600">
+                      <Icon name="phone" size={14} className="stroke-brand-600" />
+                      {contact.phone}
+                    </div>
+                    <div className="flex items-center gap-2.5 text-[13px] text-neutral-600">
+                      <Icon name="mail" size={14} className="stroke-brand-600" />
+                      {contact.email}
+                    </div>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </motion.div>
           )}
         </div>
       </section>
+
+      <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
     </main>
   )
 }
