@@ -49,7 +49,7 @@ export function JobModal({ job, onClose }: JobModalProps) {
       }}
     >
       {rendered && (
-        <div className="relative bg-white flex flex-col" style={{ borderRadius: '14px', maxHeight: 'inherit' }}>
+        <div className="relative bg-white flex flex-col h-full" style={{ borderRadius: '14px' }}>
           {/* Header — stays put; the body scrolls independently, so the close
               button and title are always reachable regardless of description length. */}
           <div className="flex items-start justify-between gap-3 p-6 pb-0 pr-14 md:p-8 md:pb-0 md:pr-16 shrink-0">
@@ -78,7 +78,7 @@ export function JobModal({ job, onClose }: JobModalProps) {
           {/* Body — the only scrollable region, capped by .job-modal's max-height.
               min-h-0 overrides the flex-item default (min-height:auto) that would
               otherwise let this grow past the parent and defeat overflow-y-auto. */}
-          <div className="overflow-y-auto flex-1 min-h-0 p-6 pt-4 md:p-8 md:pt-4">
+          <div className="overflow-y-auto flex-1 min-h-0 flex flex-col p-6 pt-4 md:p-8 md:pt-4">
             <div className="flex items-center gap-1.5 text-[13px] text-neutral-500">
               <Icon name="home" size={14} />
               {rendered.location}
@@ -101,7 +101,10 @@ export function JobModal({ job, onClose }: JobModalProps) {
               </div>
             )}
 
-            <div className="mt-5 pt-5 border-t border-neutral-200">
+            {/* Pinned to the body's bottom edge when content is short — so the
+                fixed-size modal reads as a deliberate layout, not empty leftover
+                space, regardless of description length. */}
+            <div className="mt-auto pt-5 border-t border-neutral-200">
               <div className="font-mono text-[11px] tracking-[.1em] uppercase text-neutral-400 mb-3">
                 Contacto
               </div>

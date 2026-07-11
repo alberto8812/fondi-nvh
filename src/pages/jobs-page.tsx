@@ -9,6 +9,12 @@ import type { JobOpening } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
 
+function formatShortDate(iso: string) {
+  return new Intl.DateTimeFormat('es-AR', { day: 'numeric', month: 'short', year: 'numeric' }).format(
+    new Date(`${iso}T00:00:00`),
+  )
+}
+
 const WHY_FONDI = [
   {
     icon: 'education',
@@ -159,13 +165,13 @@ export function JobsPage() {
                   type="button"
                   onClick={() => setSelectedJob(job)}
                   variants={staggerItem}
-                  className="fondi-card flex flex-col text-left bg-white border border-neutral-200 p-6 md:p-[30px] cursor-pointer"
-                  style={{ borderRadius: '10px' }}
+                  className="fondi-card flex flex-col text-left bg-white border border-neutral-200 p-6 md:p-[30px] cursor-pointer overflow-hidden"
+                  style={{ borderRadius: '10px', height: '272px' }}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h3
-                      className="font-sans font-semibold text-brand-900"
-                      style={{ fontSize: '19px', letterSpacing: '-0.01em', margin: 0 }}
+                      className="font-sans font-semibold text-brand-900 line-clamp-2"
+                      style={{ fontSize: '19px', letterSpacing: '-0.01em', margin: 0, lineHeight: 1.25 }}
                     >
                       {job.title}
                     </h3>
@@ -176,17 +182,27 @@ export function JobsPage() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-[13px] text-neutral-500 mt-2 mb-4">
-                    <Icon name="home" size={14} />
-                    {job.location}
+                  {/* Scannable facts instead of free-text prose — fixed-length
+                      data (location, short date, salary) keeps card height
+                      predictable regardless of how long the description is;
+                      the full description only shows in the detail modal. */}
+                  <div className="flex flex-col gap-1.5 mt-3">
+                    <div className="flex items-center gap-1.5 text-[13px] text-neutral-500">
+                      <Icon name="home" size={14} />
+                      {job.location}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[13px] text-neutral-500">
+                      <Icon name="clock" size={14} />
+                      Publicado el {formatShortDate(job.publishedAt)}
+                    </div>
+                    {job.salary && (
+                      <div className="text-[14px] font-medium text-brand-900 mt-0.5">{job.salary}</div>
+                    )}
                   </div>
 
-                  <p className="text-[15px] leading-[1.55] m-0 text-neutral-600" style={{ textWrap: 'pretty' }}>
-                    {job.description}
-                  </p>
-
                   {/* Pinned footer — stays at the card's bottom edge regardless of
-                      description length, so cards in the same grid row line up. */}
+                      how much metadata rendered above, so cards in the same grid
+                      row line up and the fixed card height above never overflows. */}
                   <div className="flex flex-col gap-2 mt-auto pt-5 border-t border-neutral-200">
                     <div className="flex items-center gap-2.5 text-[13px] text-neutral-600">
                       <Icon name="phone" size={14} className="stroke-brand-600" />
