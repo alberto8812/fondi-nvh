@@ -71,8 +71,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-brand-900) no-repeat top center / cover;
-  color: #fff;
+  /* Neutral canvas, not a brand color — every section that needs brand-900
+     (hero, navbar, footer) declares its own background. This is what shows
+     through during the page-transition fade in Layout, so it must read as
+     the site's resting tone regardless of which route is entering/exiting. */
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-700);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
