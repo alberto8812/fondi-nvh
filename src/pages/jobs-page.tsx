@@ -147,7 +147,7 @@ export function JobsPage() {
             </motion.div>
           ) : (
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-5"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -185,7 +185,9 @@ export function JobsPage() {
                     {job.description}
                   </p>
 
-                  <div className="flex flex-col gap-2 mt-5 pt-5 border-t border-neutral-200">
+                  {/* Pinned footer — stays at the card's bottom edge regardless of
+                      description length, so cards in the same grid row line up. */}
+                  <div className="flex flex-col gap-2 mt-auto pt-5 border-t border-neutral-200">
                     <div className="flex items-center gap-2.5 text-[13px] text-neutral-600">
                       <Icon name="phone" size={14} className="stroke-brand-600" />
                       {contact.phone}
@@ -193,6 +195,9 @@ export function JobsPage() {
                     <div className="flex items-center gap-2.5 text-[13px] text-neutral-600">
                       <Icon name="mail" size={14} className="stroke-brand-600" />
                       {contact.email}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[13px] font-medium text-brand-700 mt-1.5">
+                      Ver detalle completo →
                     </div>
                   </div>
                 </motion.button>

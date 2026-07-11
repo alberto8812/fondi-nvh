@@ -217,6 +217,7 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   background: transparent;
   max-width: min(560px, 92vw);
+  max-height: min(640px, 85vh);
   width: 100%;
   margin: auto;
   opacity: 0;
