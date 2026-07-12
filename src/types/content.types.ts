@@ -83,6 +83,11 @@ export interface JobOpening {
   salary?: string
 }
 
+export interface FaqItem {
+  q: string
+  a: string
+}
+
 export interface ContactContent {
   eyebrow: string
   headline: string
