@@ -44,8 +44,8 @@
 
   /* Typography */
   --font-sans:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Iowan Old Style", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 
   /* Easing */

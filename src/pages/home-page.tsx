@@ -9,6 +9,7 @@ import {
   AboutSection,
   TestimonialsSection,
   VideosSection,
+  FaqSection,
   ContactSection,
 } from "@/components/sections";
 
@@ -25,6 +26,7 @@ export function HomePage() {
       <AboutSection />
       <TestimonialsSection />
       <VideosSection />
+      <FaqSection />
       <ContactSection />
     </main>
   );
