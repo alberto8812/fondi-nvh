@@ -18,5 +18,13 @@
     { "id": "trabajoEstable", "label": "¿Tienes un trabajo estable?", "type": "boolean" },
     { "id": "trabajo", "label": "¿En qué trabajas?", "type": "text" }
   ],
-  "email": "info@fondi.us"
+  "email": "info@fondi.us",
+  "locations": [
+    { "city": "Charlotte", "region": "North Carolina" },
+    { "city": "Florida", "region": "Estados Unidos" }
+  ],
+  "social": {
+    "instagram": "https://instagram.com/fondi.us",
+    "facebook": "https://facebook.com/fondi.us"
+  }
 }

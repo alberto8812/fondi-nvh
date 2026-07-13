@@ -103,4 +103,6 @@ export interface ContactContent {
   teaser: string
   questions: ContactQuestion[]
   email: string
+  locations: { city: string; region: string }[]
+  social: { instagram: string; facebook: string }
 }
