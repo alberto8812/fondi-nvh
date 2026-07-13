@@ -54,6 +54,8 @@ La sección de Preguntas Frecuentes (`FaqSection`, contenido en `src/data/faq.js
 ## Pendientes
 
 - `src/data/contact.json` → `social.instagram` y `social.facebook` tienen URLs placeholder (`fondi.us`). Reemplazar por los handles reales de Fondi antes de publicar.
+- `VITE_TURNSTILE_SITE_KEY` no está configurada (no existe `.env` ni `.env.example` en el repo). Sin esta env var el widget de Turnstile nunca se renderiza y el botón de WhatsApp del chat queda deshabilitado en todos los ambientes (fail-closed, intencional). Ver `docs/proteccion-anti-bots.md` para el paso a paso de Cloudflare + Vercel.
+- Activar manualmente **Vercel Bot Protection / Attack Challenge Mode** en el dashboard de Vercel (no es configuración de código).
 
 ## Documentación adicional
 
@@ -63,3 +65,4 @@ Ver `docs/`:
 - `formulario-email-whatsapp.md` — decisión de reemplazar formulario por WhatsApp
 - `deteccion-pais-dialectos.md` — estrategia para adaptar dialecto según país del visitante
 - `deploy-aws-godaddy.md` — pasos de deploy (S3 + CloudFront + ACM + DNS en GoDaddy)
+- `proteccion-anti-bots.md` — Cloudflare Turnstile + Vercel Bot Protection
