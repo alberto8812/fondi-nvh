@@ -227,7 +227,7 @@ export function FloatingChatWidget() {
                   className="px-4 py-4"
                 >
                   <p className="text-[13.5px] leading-[1.6] m-0 mb-3.5 text-neutral-600">
-                    Revisá tus respuestas antes de enviarlas:
+                    Revisa tus respuestas antes de enviarlas:
                   </p>
                   <ul className="flex flex-col gap-2 mb-4 text-[13.5px] text-neutral-600" style={{ paddingLeft: 0, listStyle: 'none' }}>
                     {chat.monto && (
@@ -310,7 +310,7 @@ export function FloatingChatWidget() {
                           type="text"
                           value={chat.inputValue}
                           onChange={(e) => setChat((prev) => ({ ...prev, inputValue: e.target.value }))}
-                          placeholder="Escribí tu respuesta..."
+                          placeholder="Escribe tu respuesta..."
                           className="fondi-input flex-1 rounded-md text-[14px] font-sans border border-neutral-300 bg-neutral-50 text-brand-900"
                           style={{ padding: '9px 12px' }}
                         />

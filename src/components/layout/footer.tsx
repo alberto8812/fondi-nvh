@@ -1,4 +1,4 @@
-import { contact } from "@/data";
+import { contact, coverage } from "@/data";
 import { Icon } from "@/components/ui/icon";
 
 export function Footer() {
@@ -19,14 +19,14 @@ export function Footer() {
               className="h-15 w-auto object-contain"
             />
             <p className="font-serif italic text-[19px] mt-[18px] max-w-[340px] leading-[1.45] text-brand-200">
-              Estamos aquí para apoyarte cuando más lo necesitas.
+              Estamos disponibles para apoyarte cuando más lo necesitas.
             </p>
             <div className="flex gap-3 mt-5">
               <a
                 href={contact.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
+                aria-label="Instagram @fondi.financial"
                 className="text-brand-300 hover:text-on-brand transition-colors"
               >
                 <Icon name="instagram" size={20} />
@@ -35,7 +35,7 @@ export function Footer() {
                 href={contact.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
+                aria-label="Facebook Fondi US"
                 className="text-brand-300 hover:text-on-brand transition-colors"
               >
                 <Icon name="facebook" size={20} />
@@ -49,7 +49,7 @@ export function Footer() {
               Ubicaciones
             </div>
             <div className="flex flex-col gap-2.5 text-[14.5px] text-brand-200">
-              {contact.locations.map((loc) => (
+              {coverage.locations.map((loc) => (
                 <span key={loc.city} className="flex items-center gap-2">
                   <Icon name="map-pin" size={14} className="shrink-0 text-brand-500" />
                   {loc.city}, {loc.region}
@@ -88,9 +88,9 @@ export function Footer() {
               Requisitos
             </div>
             <div className="flex flex-col gap-2.5 text-[14.5px] text-brand-200">
-              <span>Pasaporte vigente</span>
-              <span>Ser mayor de 18 años</span>
-              <span>Sin fiador ni historial</span>
+              {coverage.requirements.map((req) => (
+                <span key={req}>{req}</span>
+              ))}
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Cómo funciona", href: "/#como-funciona" },
   { label: "Montos", href: "/#montos" },
   { label: "Nosotros", href: "/#nosotros" },
-  { label: "Trabajá con nosotros", href: "/careers" },
+  { label: "Únete al equipo Fondi", href: "/careers" },
 ] as const;
 
 export function Navbar() {

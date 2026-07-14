@@ -55,15 +55,21 @@ export function AmountSelectorSection() {
               textWrap: "balance",
             }}
           >
-            Elegí el monto{" "}
-            <span className="font-serif italic font-medium">que necesitás.</span>
+            Elige el monto{" "}
+            <span className="font-serif italic font-medium">que necesitas.</span>
           </h2>
           <p
             className="text-base leading-[1.6] m-0 text-brand-200"
             style={{ maxWidth: "440px" }}
           >
-            Seleccioná un monto y te asesoramos por WhatsApp en minutos. Sin
+            Selecciona un monto y te asesoramos por WhatsApp en minutos. Sin
             tasas de ejemplo, sin compromiso.
+          </p>
+          <p
+            className="text-sm leading-[1.6] mt-3 text-brand-300"
+            style={{ maxWidth: "440px" }}
+          >
+            {simulator.rangeSubtext}
           </p>
         </motion.div>
 
@@ -103,7 +109,7 @@ export function AmountSelectorSection() {
                 </div>
               </div>
               <p className="text-[13px] leading-[1.6] mt-4 text-neutral-500">
-                ¿Necesitás otro monto? Contanos por WhatsApp y te asesoramos.
+                ¿Necesitas otro monto? Cuéntanos por WhatsApp y te asesoramos.
               </p>
             </div>
 

@@ -3,13 +3,6 @@ import { motion } from "motion/react";
 import { hero } from "@/data";
 import { Button } from "@/components/ui";
 import { EASE } from "@/components/motion";
-import { openFondiChat } from "@/lib/chat-bridge";
-
-const WaIcon = () => (
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.05 21.5h-.04a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1 14.6-11.62 9.34 9.34 0 0 1 2.75 6.66 9.42 9.42 0 0 1-9.4 9.4zM20.06 3.9A11.34 11.34 0 0 0 2.2 17.58L.5 23.75l6.33-1.66a11.32 11.32 0 0 0 5.22 1.33h.01a11.35 11.35 0 0 0 8-19.52z" />
-  </svg>
-);
 
 const beat = (delay: number) => ({
   initial: { opacity: 0, y: 16 },
@@ -105,21 +98,13 @@ export function HeroSection() {
           {hero.subline}
         </motion.p>
 
-        {/* Beat 4 — CTAs (with subline, video-end) */}
+        {/* Beat 4 — CTA (with subline, video-end) */}
         <motion.div
           {...beat(0.5)}
           className="flex flex-col sm:flex-row gap-3 mt-9"
         >
           <Button variant="solid" size="lg" href={hero.ctaPrimary.href}>
             {hero.ctaPrimary.label}
-          </Button>
-          <Button
-            variant="whatsapp-outline"
-            size="lg"
-            onClick={openFondiChat}
-            icon={<WaIcon />}
-          >
-            {hero.ctaWhatsApp.label}
           </Button>
         </motion.div>
       </div>
