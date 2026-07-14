@@ -2,6 +2,8 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion } from 'motion/react'
 import { testimonials } from '@/data'
 import { fadeUp, EASE } from '@/components/motion'
+import { TestimonialModal } from '@/components/testimonial-modal'
+import type { Testimonial } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
 const CARD_WIDTH = 340
@@ -15,6 +17,7 @@ const cardFade = {
 export function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [scrollState, setScrollState] = useState({ fillPct: 100, fillOffsetPct: 0, prev: false, next: false })
+  const [selected, setSelected] = useState<Testimonial | null>(null)
 
   const updateScrollState = useCallback(() => {
     const el = trackRef.current
@@ -43,7 +46,8 @@ export function TestimonialsSection() {
   const hasOverflow = scrollState.prev || scrollState.next
 
   return (
-    <section className="bg-neutral-50 py-14 md:py-[76px] overflow-hidden">
+    <>
+      <section className="bg-neutral-50 py-14 md:py-[76px] overflow-hidden">
       {/* Header */}
       <motion.div
         className="px-5 sm:px-8 md:px-12 flex items-end justify-between gap-6"
@@ -117,7 +121,7 @@ export function TestimonialsSection() {
               </div>
 
               <p
-                className="font-serif text-brand-900 flex-1"
+                className="font-serif text-brand-900 flex-1 line-clamp-5"
                 style={{
                   fontSize: '17px',
                   lineHeight: 1.55,
@@ -127,6 +131,16 @@ export function TestimonialsSection() {
               >
                 {t.q}
               </p>
+
+              {t.q.length > 260 && (
+                <button
+                  type="button"
+                  onClick={() => setSelected(t)}
+                  className="flex items-center gap-1.5 text-[13px] font-medium text-brand-700 mt-2 py-1 self-start hover:text-brand-900 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-sm"
+                >
+                  Leer más →
+                </button>
+              )}
 
               <div className="flex items-center gap-3 mt-5 pt-5 border-t border-neutral-100">
                 <div
@@ -166,7 +180,10 @@ export function TestimonialsSection() {
           </div>
         </div>
       )}
-    </section>
+      </section>
+
+      <TestimonialModal testimonial={selected} onClose={() => setSelected(null)} />
+    </>
   )
 }
 
