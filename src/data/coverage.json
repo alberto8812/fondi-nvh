@@ -1,0 +1,21 @@
+{
+  "eyebrow": "Cobertura",
+  "headline": "Tu respaldo financiero cuando más lo necesitas",
+  "intro": "Fondi ofrece créditos personales para personas que trabajan en Estados Unidos, con un proceso claro, seguro, transparente y con atención personalizada.",
+  "locations": [
+    { "city": "North Carolina", "region": "Estados Unidos" },
+    { "city": "South Carolina", "region": "Estados Unidos" },
+    { "city": "Miami", "region": "Florida" },
+    { "city": "Orlando", "region": "Florida" },
+    { "city": "San Antonio", "region": "Texas" },
+    { "city": "Austin", "region": "Texas" },
+    { "city": "New Jersey", "region": "Estados Unidos" }
+  ],
+  "requirements": [
+    "Tener trabajo estable",
+    "Documento de Identificación",
+    "Cuenta bancaria personal de Estados Unidos",
+    "Comprobante de domicilio",
+    "Número de celular"
+  ]
+}

@@ -8,6 +8,7 @@
   "plazoMax": 36,
   "plazoStep": 3,
   "plazoDefault": 12,
-  "quickAmounts": [500, 1500, 3000, 5000],
+  "quickAmounts": [500, 1000, 1500, 2000],
+  "rangeSubtext": "Tu primer crédito puede ser de $500 a $2,000 USD. Con un buen historial de pago, podrás acceder a montos mayores en tu próxima solicitud.",
   "waNumber": "19804068356"
 }

@@ -2,25 +2,49 @@
   {
     "n": "01",
     "ic": "dollar-sign",
-    "t": "Sin inversión inicial",
+    "t": "Sin pagos adelantados",
     "d": "Olvídate de los pagos por adelantado. Comienza tu proceso hoy mismo con $0 de cuota inicial."
   },
   {
     "n": "02",
-    "ic": "clock",
-    "t": "Aprobación en 24 horas",
-    "d": "Solicita en minutos y recibe tu dinero el próximo día hábil. Sin esperas"
+    "ic": "briefcase",
+    "t": "Proceso sin complicaciones",
+    "d": "Solicita en minutos y avanza sin papeleo excesivo ni trámites innecesarios."
   },
   {
     "n": "03",
-    "ic": "shield",
-    "t": "100% seguro y confiable",
-    "d": "Tus datos están protegidos. Proceso transparente, sin costos ocultos ni letra pequeña."
+    "ic": "handshake",
+    "t": "Atención personalizada",
+    "d": "Disponible por WhatsApp con asesores reales que te acompañan en cada paso."
   },
   {
     "n": "04",
+    "ic": "users",
+    "t": "No necesitas fiador",
+    "d": "Accede a tu crédito sin necesidad de un fiador ni avalista."
+  },
+  {
+    "n": "05",
     "ic": "wallet",
-    "t": "Sin fiador ni historial",
-    "d": "Solo tu pasaporte vigente. No pedimos fiador ni revisamos historial crediticio previo."
+    "t": "Modalidad de pago",
+    "d": "Cuotas fijas y cómodas que se ajustan a tu presupuesto."
+  },
+  {
+    "n": "06",
+    "ic": "clock",
+    "t": "Desembolsos rápidos",
+    "d": "Recibe tu dinero en menos de 24 horas tras la aprobación."
+  },
+  {
+    "n": "07",
+    "ic": "badge",
+    "t": "Sin SSN ni historial crediticio",
+    "d": "No necesitas Seguro Social ni historial crediticio en Estados Unidos."
+  },
+  {
+    "n": "08",
+    "ic": "shield",
+    "t": "Tus datos están protegidos",
+    "d": "Proceso transparente, sin costos ocultos ni letra pequeña. Tu información siempre segura."
   }
 ]

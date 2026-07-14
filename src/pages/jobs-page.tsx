@@ -10,6 +10,10 @@ import type { JobOpening } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
 
+// Placeholder application form link — single canonical constant so the
+// client can swap the real Microsoft Forms URL in one place once it's ready.
+const JOB_APPLICATION_FORM_URL = 'https://forms.office.com/r/PLACEHOLDER-fondi-careers'
+
 const WHY_FONDI = [
   {
     icon: 'education',
@@ -28,6 +32,13 @@ const WHY_FONDI = [
   },
 ]
 
+const EXPECTATIONS = [
+  'Actitud comercial',
+  'Orientación al servicio',
+  'Buena presentación personal',
+  'Experiencia en ventas o servicio al cliente',
+]
+
 export function JobsPage() {
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null)
   const activeJobs = jobs.filter((job) => job.active)
@@ -41,7 +52,7 @@ export function JobsPage() {
         {/* Header — text + photo, two columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={VP}>
-            <Eyebrow>Trabajá con nosotros</Eyebrow>
+            <Eyebrow>Únete al equipo Fondi</Eyebrow>
             <h1
               className="font-sans font-semibold mt-[14px] text-brand-900"
               style={{
@@ -52,11 +63,12 @@ export function JobsPage() {
                 margin: '14px 0 18px',
               }}
             >
-              Construí tu <span className="font-serif italic font-medium">carrera</span> en Fondi.
+              Únete al equipo <span className="font-serif italic font-medium">Fondi</span>.
             </h1>
             <p className="text-base leading-[1.65] text-neutral-600" style={{ maxWidth: '420px' }}>
-              Sumate a un equipo que ayuda todos los días a miles de personas a acceder al crédito
-              que necesitan. Buscamos gente comprometida para crecer junto a nosotros.
+              Súmate a una empresa que cada día ayuda a más personas a acceder al respaldo
+              financiero que necesitan. Buscamos personas comprometidas, con actitud de servicio y
+              ganas de crecer junto a nosotros.
             </p>
           </motion.div>
 
@@ -121,6 +133,43 @@ export function JobsPage() {
           </motion.div>
         </motion.div>
 
+        {/* What we expect from you */}
+        <motion.div
+          className="mt-10 md:mt-14 pt-10 md:pt-12 border-t border-neutral-200"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VP}
+        >
+          <Eyebrow className="mb-6">¿Qué esperamos de ti?</Eyebrow>
+          <motion.ul
+            className="grid grid-cols-1 sm:grid-cols-2 gap-3 list-none p-0 m-0"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VP}
+          >
+            {EXPECTATIONS.map((item) => (
+              <motion.li
+                key={item}
+                variants={staggerItem}
+                className="flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 p-4"
+              >
+                <div
+                  className="flex items-center justify-center bg-brand-900/[0.08] text-brand-900 shrink-0"
+                  style={{ width: '32px', height: '32px', borderRadius: '9px' }}
+                >
+                  <Icon name="badge" size={16} />
+                </div>
+                <p className="text-[14px] text-neutral-700 m-0">{item}</p>
+              </motion.li>
+            ))}
+          </motion.ul>
+          <p className="text-[14px] leading-[1.55] text-neutral-600 mt-5">
+            Importante: debes tener tu situación migratoria definida.
+          </p>
+        </motion.div>
+
         {/* Open roles */}
         <div className="mt-10 md:mt-14 pt-10 md:pt-12 border-t border-neutral-200">
           <Eyebrow className="mb-6">Búsquedas abiertas</Eyebrow>
@@ -136,10 +185,10 @@ export function JobsPage() {
             >
               <p className="text-[15px] leading-[1.55] m-0 mb-6 text-neutral-600">
                 Por el momento no tenemos vacantes abiertas, pero nos encantaría conocerte.
-                Escribinos y te contactamos cuando surja una oportunidad para vos.
+                Escríbenos y te contactamos cuando surja una oportunidad para ti.
               </p>
               <Button variant="primary" onClick={() => openFondiChat()}>
-                Contactanos
+                Contáctanos
               </Button>
             </motion.div>
           ) : (
@@ -209,6 +258,21 @@ export function JobsPage() {
               ))}
             </motion.div>
           )}
+
+          <motion.div
+            className="mt-8 md:mt-10 pt-8 border-t border-neutral-200 text-center"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VP}
+          >
+            <Button variant="primary" href={JOB_APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer">
+              📝 Aplica hoy completando el formulario
+            </Button>
+            <p className="text-[14px] text-neutral-600 mt-4">
+              También puedes enviar tu hoja de vida al correo: {contact.email}
+            </p>
+          </motion.div>
         </div>
       </section>
 

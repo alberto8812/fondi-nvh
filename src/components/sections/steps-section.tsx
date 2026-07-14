@@ -26,7 +26,7 @@ export function StepsSection() {
             marginBottom: '44px',
           }}
         >
-          Tres pasos y el dinero está{' '}
+          Cuatro pasos y el dinero está{' '}
           <span className="font-serif italic font-medium">en tu cuenta.</span>
         </h2>
       </motion.div>
@@ -34,20 +34,33 @@ export function StepsSection() {
       {/* Steps — each child gets its own whileInView + delay; the grid container has overflow:hidden
           so we can't use a staggerContainer wrapper (IntersectionObserver can't observe display:contents) */}
       <div
-        className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-neutral-50"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-neutral-50"
         style={{
           borderRadius: '10px',
           overflow: 'hidden',
         }}
       >
-        {steps.map((p, i) => (
+        {steps.map((p, i) => {
+          const isLast = i === steps.length - 1
+          const isLastMdCol = i % 2 === 1
+          const isMdSecondRow = i >= 2
+          const borderClasses = [
+            !isLast && 'border-b',
+            isMdSecondRow ? 'md:border-b-0' : 'md:border-b',
+            'lg:border-b-0',
+            !isLastMdCol && 'md:border-r',
+            !isLast && 'lg:border-r',
+          ]
+            .filter(Boolean)
+            .join(' ')
+          return (
           <motion.div
             key={p.n}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: EASE, delay: i * 0.1 }}
             viewport={VP}
-            className={`px-6 py-7 md:px-[30px] md:py-[34px] ${i < steps.length - 1 ? 'border-b md:border-b-0 md:border-r border-neutral-200' : ''}`}
+            className={`px-6 py-7 md:px-[30px] md:py-[34px] border-neutral-200 ${borderClasses}`}
           >
             <div className="font-mono text-[13px] tracking-[.08em] text-brand-500">
               PASO {p.n}
@@ -62,7 +75,8 @@ export function StepsSection() {
               {p.d}
             </p>
           </motion.div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

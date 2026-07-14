@@ -1,18 +1,42 @@
 [
   {
-    "q": "¿Puedo pedir un crédito solo con pasaporte?",
-    "a": "Sí. En la mayoría de los casos no pedimos historial crediticio en Estados Unidos ni un fiador: con tu pasaporte y algunos datos básicos podés iniciar la solicitud."
+    "q": "¿Debo pagar algo para iniciar mi solicitud?",
+    "a": "No. En Fondi nunca solicitamos pagos por adelantado para iniciar, evaluar o procesar una solicitud de crédito. Si alguien te solicita un pago para poder desembolsar tu préstamo, desconfía: esa práctica es ilegal y no hace parte de nuestro proceso."
   },
   {
-    "q": "¿Cuánto tarda el desembolso del crédito?",
-    "a": "Una vez aprobada tu solicitud, el desembolso suele realizarse en menos de 24 horas. Los tiempos exactos pueden variar según el banco receptor y la verificación de tus datos."
+    "q": "¿Qué documentos necesito?",
+    "a": "Documento de Identificación, cuenta bancaria de Estados Unidos, comprobante de domicilio."
   },
   {
-    "q": "¿Necesito historial crediticio en Estados Unidos?",
-    "a": "No es un requisito excluyente. Evaluamos tu solicitud considerando otros factores además del historial crediticio tradicional, por eso muchas personas migrantes sin historial en EE. UU. pueden calificar."
+    "q": "¿Cómo inicio mi solicitud?",
+    "a": "Solo debes escribirnos por WhatsApp. Uno de nuestros asesores te orientará y te acompañará durante todo el proceso."
   },
   {
-    "q": "¿Qué documentos necesito para aplicar?",
-    "a": "Generalmente alcanza con tu pasaporte y un comprobante de ingresos o de residencia. Durante el proceso te vamos a indicar si necesitamos algún documento adicional según tu caso."
+    "q": "¿Cómo recibiré el dinero?",
+    "a": "Si tu solicitud es aprobada, el dinero será depositado directamente en tu cuenta bancaria de Estados Unidos."
+  },
+  {
+    "q": "¿Quién puede solicitar un crédito en Fondi?",
+    "a": "Personas que trabajan en una empresa en Estados Unidos y cuentan con una fuente de ingresos estable, una cuenta bancaria, una dirección en Estados Unidos y una identificación válida."
+  },
+  {
+    "q": "¿Cuál es el monto del primer crédito?",
+    "a": "El primer crédito puede ser de $500 a $2,000 USD. Con un buen historial de pago, podrás solicitar montos mayores en futuras solicitudes."
+  },
+  {
+    "q": "¿Cuánto tarda el proceso?",
+    "a": "Una vez aprobada tu solicitud, el desembolso se realiza en menos de 24 horas."
+  },
+  {
+    "q": "¿Debo reunirme con un asesor?",
+    "a": "Sí. Durante el proceso, un asesor de tu zona se comunicará contigo para explicarte los detalles, resolver tus dudas y coordinar la firma de la documentación necesaria."
+  },
+  {
+    "q": "¿Cómo sé que el proceso es seguro?",
+    "a": "En Fondi trabajamos con un proceso claro y transparente. Además, nunca te pediremos dinero por adelantado para iniciar o aprobar tu solicitud."
+  },
+  {
+    "q": "¿Para qué puedes usar tu crédito?",
+    "a": "Con Fondi puedes utilizar tu crédito para lo que necesites: cubrir gastos personales o del hogar, atender una emergencia o imprevisto, pagar estudios o capacitación, realizar una compra importante, consolidar gastos, o impulsar un proyecto personal. Tú decides cómo utilizar tu dinero."
   }
 ]

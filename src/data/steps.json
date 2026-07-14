@@ -1,17 +1,22 @@
 [
   {
     "n": "01",
-    "t": "Elegí tu monto",
-    "d": "Elegí el monto que necesitás y armamos tu mensaje de WhatsApp automáticamente."
+    "t": "Elige el monto que deseas solicitar",
+    "d": "Elige entre $500 y $2,000 USD para tu primer crédito. Con un buen historial de pago, podrás acceder a montos mayores en próximas solicitudes."
   },
   {
     "n": "02",
-    "t": "Envía tu solicitud",
-    "d": "Completá el formulario con tus datos. Solo necesitás tu pasaporte vigente."
+    "t": "Inicia tu solicitud por WhatsApp",
+    "d": "Escríbenos y te asignamos un asesor según tu ciudad para acompañarte durante todo el proceso."
   },
   {
     "n": "03",
-    "t": "Recibe tu dinero",
-    "d": "Aprobamos y transferimos en menos de 24 horas. Sin fiador, sin trámites complicados."
+    "t": "Habla con tu asesor",
+    "d": "Tu asesor te llama para explicarte el proceso, resolver tus dudas y coordinar la firma de la documentación."
+  },
+  {
+    "n": "04",
+    "t": "Recibe el dinero en tu cuenta bancaria",
+    "d": "Una vez aprobada tu solicitud, el desembolso se realiza en menos de 24 horas."
   }
 ]

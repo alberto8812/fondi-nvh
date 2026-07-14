@@ -23,6 +23,11 @@ export function TrustBarSection() {
             <div className="text-[13px] mt-2 text-brand-200">
               {s.l}
             </div>
+            {s.d && (
+              <div className="text-[11px] mt-1 text-brand-300">
+                {s.d}
+              </div>
+            )}
           </motion.div>
         ))}
       </motion.div>
