@@ -1,0 +1,16 @@
+{
+  "greeting": "¡Hola! 👋 Te ayudo a postularte. Te hago algunas preguntas rápidas y paso todo directo a un asesor por WhatsApp.",
+  "teaser": "¿Quieres postularte a una vacante? 📝",
+  "waIntroTemplate": "Hola, quiero postularme a la vacante de {jobTitle}. Mis datos:",
+  "waIntroGeneric": "Hola, quiero postularme a una vacante en Fondi. Mis datos:",
+  "questions": [
+    { "id": "nombre", "label": "Nombre completo", "type": "text" },
+    { "id": "telefono", "label": "Número de teléfono", "type": "text" },
+    { "id": "autorizacion", "label": "¿Cuentas con autorización para trabajar en Estados Unidos?", "type": "boolean" },
+    { "id": "ciudad", "label": "¿En cuál ciudad vives?", "type": "text" },
+    { "id": "disponibilidad", "label": "¿Qué disponibilidad de tiempo tienes?", "type": "text" },
+    { "id": "experiencia", "label": "Cuéntanos sobre tu experiencia laboral y funciones que realizabas", "type": "text" },
+    { "id": "educacion", "label": "Nivel de educación", "type": "text" },
+    { "id": "email", "label": "Email", "type": "text" }
+  ]
+}

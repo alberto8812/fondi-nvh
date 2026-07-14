@@ -72,7 +72,7 @@ export function FaqSection() {
             style={{ maxWidth: "360px" }}
           >
             <p className="text-[13px] leading-[1.6] text-neutral-500">
-              ¿Tu pregunta no está acá? Contanos por WhatsApp y te respondemos
+              ¿Tu pregunta no está acá? Cuéntanos por WhatsApp y te respondemos
               en minutos.
             </p>
           </div>
@@ -166,7 +166,7 @@ export function FaqSection() {
           {/* WhatsApp fallback — mobile only, desktop version lives in the left column */}
           <div className="mt-2 pt-5 border-t border-neutral-200 lg:hidden">
             <p className="text-[13px] leading-[1.6] text-neutral-500">
-              ¿Tu pregunta no está acá? Contanos por WhatsApp y te respondemos
+              ¿Tu pregunta no está acá? Cuéntanos por WhatsApp y te respondemos
               en minutos.
             </p>
           </div>

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
-import { contact } from '@/data'
+import { contact, jobApplication, jobs } from '@/data'
 import { Button } from '@/components/ui'
-import { CHAT_OPEN_EVENT } from '@/lib/chat-bridge'
+import { CHAT_OPEN_EVENT, type ChatOpenSeed } from '@/lib/chat-bridge'
 
 const PANEL_EASE = [0.23, 1, 0.32, 1] as const
 
@@ -65,9 +66,21 @@ function UserBubble({ children }: { children: React.ReactNode }) {
   )
 }
 
+type ChatMode = 'loan' | 'application'
+
+interface WidgetQuestion {
+  id: string
+  label: string
+  type: 'text' | 'boolean' | 'choice'
+  options?: string[]
+}
+
 interface ChatState {
   open: boolean
   teaser: 'pending' | 'shown' | 'dismissed'
+  mode: ChatMode
+  jobTitle?: string
+  questions: WidgetQuestion[]
   step: number
   answers: Record<string, string>
   inputValue: string
@@ -77,23 +90,66 @@ interface ChatState {
   turnstileToken: string | null
 }
 
-const INITIAL_STATE: ChatState = {
-  open: false,
-  teaser: 'pending',
-  step: 0,
-  answers: {},
-  inputValue: '',
-  typing: true,
-  done: false,
-  turnstileToken: null,
+const VACANTE_QUESTION_ID = 'vacante'
+
+function activeJobTitles() {
+  return jobs.filter((job) => job.active).map((job) => `${job.title} — ${job.location}`)
+}
+
+function buildQuestions(mode: ChatMode, jobTitle: string | undefined): WidgetQuestion[] {
+  if (mode === 'loan') return contact.questions
+  if (jobTitle) return jobApplication.questions
+  const options = activeJobTitles()
+  return [
+    {
+      id: VACANTE_QUESTION_ID,
+      label: '¿A qué vacante te gustaría postularte?',
+      type: 'choice',
+      options: options.length ? options : ['Otra vacante'],
+    },
+    ...jobApplication.questions,
+  ]
+}
+
+function initialState(mode: ChatMode, jobTitle?: string): ChatState {
+  return {
+    open: false,
+    teaser: 'pending',
+    mode,
+    jobTitle,
+    questions: buildQuestions(mode, jobTitle),
+    step: 0,
+    answers: {},
+    inputValue: '',
+    typing: true,
+    done: false,
+    turnstileToken: null,
+  }
 }
 
 export function FloatingChatWidget() {
-  const { questions } = contact
-  const [chat, setChat] = useState<ChatState>(INITIAL_STATE)
+  const location = useLocation()
+  const routeMode: ChatMode = location.pathname.startsWith('/careers') ? 'application' : 'loan'
+  const routeModeRef = useRef(routeMode)
+
+  const [chat, setChat] = useState<ChatState>(() => initialState(routeMode))
   const bottomRef = useRef<HTMLDivElement>(null)
   const turnstileContainerRef = useRef<HTMLDivElement>(null)
   const turnstileWidgetIdRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    routeModeRef.current = routeMode
+  }, [routeMode])
+
+  // Keep the idle (closed) widget's mode synced to the current route, so the
+  // teaser/greeting shown before the first open already match the page —
+  // but never touch an in-progress or open conversation.
+  useEffect(() => {
+    setChat((prev) => {
+      if (prev.open || prev.mode === routeMode) return prev
+      return initialState(routeMode)
+    })
+  }, [routeMode, chat.open])
 
   useEffect(() => {
     const teaserTimer = setTimeout(() => {
@@ -104,8 +160,30 @@ export function FloatingChatWidget() {
 
   useEffect(() => {
     const openFromEvent = (e: Event) => {
-      const monto = (e as CustomEvent<{ monto?: string }>).detail?.monto
-      setChat((prev) => ({ ...prev, open: true, teaser: 'dismissed', monto: monto ?? prev.monto }))
+      const detail = (e as CustomEvent<ChatOpenSeed>).detail
+      const mode = detail?.mode ?? routeModeRef.current
+      const jobTitle = detail?.jobTitle
+
+      setChat((prev) => {
+        const contextChanged = prev.mode !== mode || prev.jobTitle !== jobTitle
+        const shouldReset = contextChanged || prev.done
+
+        if (shouldReset) {
+          return {
+            ...initialState(mode, jobTitle),
+            open: true,
+            teaser: 'dismissed',
+            monto: detail?.monto ?? prev.monto,
+          }
+        }
+
+        return {
+          ...prev,
+          open: true,
+          teaser: 'dismissed',
+          monto: detail?.monto ?? prev.monto,
+        }
+      })
     }
     window.addEventListener(CHAT_OPEN_EVENT, openFromEvent)
     return () => window.removeEventListener(CHAT_OPEN_EVENT, openFromEvent)
@@ -158,29 +236,43 @@ export function FloatingChatWidget() {
     }
   }, [chat.open, chat.done])
 
-  const currentQuestion = questions[chat.step]
+  const currentQuestion = chat.questions[chat.step]
+  const isApplication = chat.mode === 'application'
+  const greeting = isApplication ? jobApplication.greeting : contact.greeting
+  const teaserText = isApplication ? jobApplication.teaser : contact.teaser
 
   function answer(value: string) {
     const trimmed = value.trim()
     if (!trimmed || !currentQuestion) return
     const nextAnswers = { ...chat.answers, [currentQuestion.id]: trimmed }
-    const isLast = chat.step + 1 >= questions.length
+    const isLast = chat.step + 1 >= chat.questions.length
     setChat((prev) => ({
       ...prev,
       step: isLast ? prev.step : prev.step + 1,
       answers: nextAnswers,
+      jobTitle: currentQuestion.id === VACANTE_QUESTION_ID ? trimmed : prev.jobTitle,
       inputValue: '',
       typing: true,
       done: isLast,
     }))
   }
 
-  const waText = [
-    contact.waIntro,
-    '',
-    ...(chat.monto ? [`Monto solicitado: ${chat.monto}`, ''] : []),
-    ...questions.map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
-  ].join('\n')
+  const waText = isApplication
+    ? [
+        chat.jobTitle
+          ? jobApplication.waIntroTemplate.replace('{jobTitle}', chat.jobTitle)
+          : jobApplication.waIntroGeneric,
+        '',
+        ...chat.questions
+          .filter((q) => q.id !== VACANTE_QUESTION_ID)
+          .map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
+      ].join('\n')
+    : [
+        contact.waIntro,
+        '',
+        ...(chat.monto ? [`Monto solicitado: ${chat.monto}`, ''] : []),
+        ...chat.questions.map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
+      ].join('\n')
   const waHref = `https://wa.me/${contact.waNumber}?text=${encodeURIComponent(waText)}`
 
   return (
@@ -193,7 +285,7 @@ export function FloatingChatWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ duration: 0.22, ease: PANEL_EASE }}
-            style={{ transformOrigin: 'bottom right' }}
+            style={{ transformOrigin: 'bottom right', maxHeight: 'min(600px, calc(100vh - 96px))' }}
             className="flex flex-col w-[min(360px,92vw)] rounded-2xl bg-neutral-50 shadow-2xl border border-neutral-200 overflow-hidden"
           >
             {/* Header */}
@@ -207,6 +299,11 @@ export function FloatingChatWidget() {
                   <span className="w-1.5 h-1.5 rounded-full bg-whatsapp" />
                   En línea · {contact.assistantRole}
                 </div>
+                {isApplication && chat.jobTitle && (
+                  <div className="text-brand-300 text-[11px] leading-tight mt-0.5 truncate">
+                    Postulación: {chat.jobTitle}
+                  </div>
+                )}
               </div>
               <button
                 onClick={() => setChat((prev) => ({ ...prev, open: false }))}
@@ -224,37 +321,52 @@ export function FloatingChatWidget() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, ease: PANEL_EASE }}
-                  className="px-4 py-4"
+                  className="flex flex-col"
                 >
-                  <p className="text-[13.5px] leading-[1.6] m-0 mb-3.5 text-neutral-600">
-                    Revisá tus respuestas antes de enviarlas:
+                  <p className="text-[13.5px] leading-[1.6] m-0 px-4 pt-4 pb-3 text-neutral-600 shrink-0">
+                    Revisa tus respuestas antes de enviarlas:
                   </p>
-                  <ul className="flex flex-col gap-2 mb-4 text-[13.5px] text-neutral-600" style={{ paddingLeft: 0, listStyle: 'none' }}>
+
+                  {/* Independently scrollable, capped regardless of question
+                      count — the send action below must always stay
+                      reachable, whether there are 3 answers or 12. */}
+                  <ul
+                    className="overflow-y-auto flex flex-col gap-2 px-4 text-[13.5px] text-neutral-600"
+                    style={{
+                      paddingLeft: '16px',
+                      listStyle: 'none',
+                      maxHeight: '272px',
+                      maskImage: 'linear-gradient(to bottom, transparent 0, black 12px, black calc(100% - 12px), transparent 100%)',
+                    }}
+                  >
                     {chat.monto && (
-                      <li className="flex flex-col gap-0.5 pb-2 border-b border-neutral-100">
+                      <li className="flex flex-col gap-0.5 py-2 border-b border-neutral-100">
                         <span className="text-[11.5px] text-neutral-400">Monto solicitado</span>
                         <span className="text-brand-900 font-medium">{chat.monto}</span>
                       </li>
                     )}
-                    {questions.map((q) => (
-                      <li key={q.id} className="flex flex-col gap-0.5 pb-2 border-b border-neutral-100 last:border-0">
+                    {chat.questions.map((q) => (
+                      <li key={q.id} className="flex flex-col gap-0.5 py-2 border-b border-neutral-100 last:border-0">
                         <span className="text-[11.5px] text-neutral-400">{q.label}</span>
                         <span className="text-brand-900 font-medium">{chat.answers[q.id]}</span>
                       </li>
                     ))}
                   </ul>
-                  <div ref={turnstileContainerRef} className="flex justify-center mb-3.5" />
-                  <Button
-                    variant="whatsapp"
-                    size="lg"
-                    href={chat.turnstileToken ? waHref : undefined}
-                    target={chat.turnstileToken ? '_blank' : undefined}
-                    rel={chat.turnstileToken ? 'noopener noreferrer' : undefined}
-                    icon={<WaIcon />}
-                    className={`justify-center w-full ${chat.turnstileToken ? '' : 'opacity-50 pointer-events-none'}`}
-                  >
-                    Enviar por WhatsApp
-                  </Button>
+
+                  <div className="shrink-0 px-4 pt-3 pb-4 border-t border-neutral-100">
+                    <div ref={turnstileContainerRef} className="flex justify-center mb-3.5" />
+                    <Button
+                      variant="whatsapp"
+                      size="lg"
+                      href={chat.turnstileToken ? waHref : undefined}
+                      target={chat.turnstileToken ? '_blank' : undefined}
+                      rel={chat.turnstileToken ? 'noopener noreferrer' : undefined}
+                      icon={<WaIcon />}
+                      className={`justify-center w-full ${chat.turnstileToken ? '' : 'opacity-50 pointer-events-none'}`}
+                    >
+                      Enviar por WhatsApp
+                    </Button>
+                  </div>
                 </motion.div>
               ) : (
                 <motion.div
@@ -267,8 +379,8 @@ export function FloatingChatWidget() {
                     className="flex flex-col gap-2.5 px-4 py-4"
                     style={{ maxHeight: '340px', overflowY: 'auto' }}
                   >
-                    <BotBubble>{contact.greeting}</BotBubble>
-                    {questions.slice(0, chat.step).map((q) => (
+                    <BotBubble>{greeting}</BotBubble>
+                    {chat.questions.slice(0, chat.step).map((q) => (
                       <div key={q.id} className="flex flex-col gap-2.5">
                         <BotBubble>{q.label}</BotBubble>
                         <UserBubble>{chat.answers[q.id]}</UserBubble>
@@ -297,6 +409,18 @@ export function FloatingChatWidget() {
                           </button>
                         ))}
                       </div>
+                    ) : currentQuestion?.type === 'choice' ? (
+                      <div className="flex flex-col gap-2">
+                        {(currentQuestion.options ?? []).map((option) => (
+                          <button
+                            key={option}
+                            onClick={() => answer(option)}
+                            className="font-medium text-sm px-4 py-2.5 rounded-lg text-left cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
                     ) : (
                       <form
                         onSubmit={(e) => {
@@ -310,7 +434,7 @@ export function FloatingChatWidget() {
                           type="text"
                           value={chat.inputValue}
                           onChange={(e) => setChat((prev) => ({ ...prev, inputValue: e.target.value }))}
-                          placeholder="Escribí tu respuesta..."
+                          placeholder="Escribe tu respuesta..."
                           className="fondi-input flex-1 rounded-md text-[14px] font-sans border border-neutral-300 bg-neutral-50 text-brand-900"
                           style={{ padding: '9px 12px' }}
                         />
@@ -343,7 +467,7 @@ export function FloatingChatWidget() {
             className="relative max-w-[240px] rounded-2xl rounded-br-sm bg-neutral-50 shadow-lg border border-neutral-200 pl-4 pr-7 py-3 text-[13.5px] text-neutral-700 cursor-pointer"
             onClick={() => setChat((prev) => ({ ...prev, open: true, teaser: 'dismissed' }))}
           >
-            {contact.teaser}
+            {teaserText}
             <button
               onClick={(e) => {
                 e.stopPropagation()

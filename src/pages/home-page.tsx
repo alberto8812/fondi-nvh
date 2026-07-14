@@ -7,6 +7,7 @@ import {
   StepsSection,
   ServicesSection,
   AboutSection,
+  CoverageSection,
   TestimonialsSection,
   VideosSection,
   FaqSection,
@@ -24,6 +25,7 @@ export function HomePage() {
       <StepsSection />
       <ServicesSection />
       <AboutSection />
+      <CoverageSection />
       <TestimonialsSection />
       <VideosSection />
       <FaqSection />

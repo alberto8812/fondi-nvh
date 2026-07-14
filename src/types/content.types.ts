@@ -4,13 +4,13 @@ export interface HeroContent {
   headlineItalic: string
   subline: string
   ctaPrimary: { label: string; href: string }
-  ctaWhatsApp: { label: string; href: string }
   bgVideo: string
 }
 
 export interface Stat {
   v: string
   l: string
+  d?: string
 }
 
 export interface Benefit {
@@ -31,6 +31,7 @@ export interface SimulatorConfig {
   plazoStep: number
   plazoDefault: number
   quickAmounts: number[]
+  rangeSubtext: string
   waNumber: string
 }
 
@@ -44,6 +45,14 @@ export interface Service {
   ic: string
   t: string
   d: string
+}
+
+export interface CoverageContent {
+  eyebrow: string
+  headline: string
+  intro: string
+  locations: { city: string; region: string }[]
+  requirements: string[]
 }
 
 export interface AboutContent {
@@ -83,9 +92,22 @@ export interface JobOpening {
   salary?: string
 }
 
+// Careers rebuild — jobs.json holds only the fields that vary per city; the
+// shared role fields (title/modality/description/salary/active) live in
+// `ADVISOR_ROLE` (src/data/index.ts) and get spread over each input.
+export type JobOpeningInput = Pick<JobOpening, 'location' | 'publishedAt'>
+
 export interface FaqItem {
   q: string
   a: string
+}
+
+export interface JobApplicationContent {
+  greeting: string
+  teaser: string
+  waIntroTemplate: string
+  waIntroGeneric: string
+  questions: ContactQuestion[]
 }
 
 export interface ContactContent {
@@ -103,6 +125,5 @@ export interface ContactContent {
   teaser: string
   questions: ContactQuestion[]
   email: string
-  locations: { city: string; region: string }[]
   social: { instagram: string; facebook: string }
 }

@@ -9,8 +9,8 @@
   "waIntro": "Hola, quiero información sobre un crédito. Mis datos:",
   "assistantName": "Ana",
   "assistantRole": "Asesora Fondi",
-  "greeting": "¡Hola! 👋 Soy Ana, asesora de Fondi. Te ayudo a armar tu pedido en menos de un minuto y lo paso directo a un asesor por WhatsApp. ¿Vemos qué necesitás?",
-  "teaser": "¿Buscás un crédito rápido? 💬",
+  "greeting": "¡Hola! 👋 Soy Ana, asesora de Fondi. Te ayudo a armar tu pedido en menos de un minuto y lo paso directo a un asesor por WhatsApp. ¿Vemos qué necesitas?",
+  "teaser": "¿Buscas un crédito rápido? 💬",
   "questions": [
     { "id": "nombre", "label": "Tu nombre", "type": "text" },
     { "id": "ciudad", "label": "¿En qué ciudad y estado vives?", "type": "text" },
@@ -18,11 +18,7 @@
     { "id": "trabajoEstable", "label": "¿Tienes un trabajo estable?", "type": "boolean" },
     { "id": "trabajo", "label": "¿En qué trabajas?", "type": "text" }
   ],
-  "email": "info@fondi.us",
-  "locations": [
-    { "city": "Charlotte", "region": "North Carolina" },
-    { "city": "Florida", "region": "Estados Unidos" }
-  ],
+  "email": "contacto@fondi.us",
   "social": {
     "instagram": "https://instagram.com/fondi.us",
     "facebook": "https://facebook.com/fondi.us"

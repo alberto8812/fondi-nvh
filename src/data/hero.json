@@ -1,15 +1,11 @@
 {
   "eyebrow": "Créditos rápidos y seguros",
-  "headline": "El dinero que necesitas,",
-  "headlineItalic": "cuando más lo necesitas.",
-  "subline": "Tu dinero en menos de 24 horas. Sin fiador, papeleo fácil y solo con tu pasaporte..",
+  "headline": "Trámite sencillo, sin papeleo excesivo",
+  "headlineItalic": "y con desembolsos en menos de 24 horas.",
+  "subline": "Solicita en minutos por WhatsApp. Sin pagos por adelantado, sin fiador y con atención personalizada en cada paso.",
   "ctaPrimary": {
-    "label": "Elegí tu monto",
+    "label": "Aplicar para un préstamo",
     "href": "#montos"
-  },
-  "ctaWhatsApp": {
-    "label": "WhatsApp",
-    "href": "https://wa.me/19804068356"
   },
   "bgVideo": "/images/hero-bg-loop.mp4"
 }

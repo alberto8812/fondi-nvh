@@ -1,5 +1,11 @@
 export const CHAT_OPEN_EVENT = 'fondi:open-chat'
 
-export function openFondiChat(seed?: { monto?: string }) {
+export interface ChatOpenSeed {
+  monto?: string
+  mode?: 'loan' | 'application'
+  jobTitle?: string
+}
+
+export function openFondiChat(seed?: ChatOpenSeed) {
   window.dispatchEvent(new CustomEvent(CHAT_OPEN_EVENT, { detail: seed }))
 }

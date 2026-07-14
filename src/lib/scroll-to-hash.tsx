@@ -14,8 +14,8 @@ export function ScrollToHash() {
     }
 
     if (!hash) {
-      // Client-side route change with no anchor (e.g. navbar "Trabajá con
-      // nosotros" to /careers) — the SPA doesn't reload, so the browser keeps
+      // Client-side route change with no anchor (e.g. navbar "Únete al
+      // equipo Fondi" to /careers) — the SPA doesn't reload, so the browser keeps
       // whatever scroll position the previous page was at unless we reset it.
       window.scrollTo(0, 0)
       return

@@ -2,5 +2,5 @@
   { "v": "+5,000", "l": "créditos otorgados" },
   { "v": "< 24 h", "l": "tiempo de desembolso" },
   { "v": "4.9 / 5", "l": "satisfacción de clientes" },
-  { "v": "0", "l": "fiadores requeridos" }
+  { "v": "$0", "l": "por adelantado", "d": "Nunca pedimos dinero para solicitar tu crédito." }
 ]

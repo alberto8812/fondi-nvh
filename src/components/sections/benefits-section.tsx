@@ -16,7 +16,7 @@ export function BenefitsSection() {
         viewport={VP}
       >
         <div className="font-mono text-xs tracking-[.14em] uppercase text-neutral-400">
-          ¿Por qué elegirnos?
+          ¿Por qué elegir Fondi?
         </div>
         <h2
           className="font-sans font-semibold mt-[14px] text-brand-900"
