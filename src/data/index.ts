@@ -14,6 +14,7 @@ import type {
   JobOpeningInput,
   JobApplicationContent,
   FaqItem,
+  JobsPageContent,
 } from '@/types/content.types'
 
 import heroRaw from './hero.json'
@@ -30,6 +31,7 @@ import contactRaw from './contact.json'
 import jobsRaw from './jobs.json'
 import faqRaw from './faq.json'
 import jobApplicationRaw from './job-application.json'
+import jobsPageRaw from './jobs-page.json'
 
 export const hero = heroRaw satisfies HeroContent
 export const stats = statsRaw satisfies Stat[]
@@ -63,3 +65,4 @@ export const jobs = (jobsRaw as JobOpeningInput[]).map((input) => ({
 
 export const faq = faqRaw satisfies FaqItem[]
 export const jobApplication = jobApplicationRaw as JobApplicationContent
+export const jobsPage = jobsPageRaw satisfies JobsPageContent

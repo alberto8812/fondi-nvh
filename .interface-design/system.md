@@ -72,6 +72,15 @@ accent-700 #339997
 - **Accordion reveal** — CSS `grid-template-rows` `0fr → 1fr` trick (not framer height animation), `duration-300` with `var(--ease-out)`. Chevron rotates 180° on the same easing. Answer text indented `pl-[70px]` to align under the question (badge width `30px` + `16px` gap + `24px` card padding).
 - **Accordion a11y** — trigger `button` has `aria-expanded` + `aria-controls`; panel has matching `id` + `aria-labelledby` + `role="region"`.
 
+## Key component patterns — panel con contenido variable (scroll interno + acción fija)
+
+- **`floating-chat-widget.tsx`** (pantalla de resumen "Revisa tus respuestas antes de enviarlas") — un panel cuyo contenido crece con el número de preguntas (puede ser un chat de crédito de 5 preguntas o una postulación de 8+) no puede simplemente crecer sin tope: en modo flotante (`position: fixed`, anclado a una esquina) el contenido que se sale del viewport queda inalcanzable, sin scroll posible.
+- **Contenedor externo** — `maxHeight: min(600px, calc(100vh - 96px))` sobre el panel completo, como red de seguridad final independiente del contenido.
+- **Zona de contenido variable** — su propio `maxHeight` fijo (`272px` en este caso) + `overflow-y-auto`, en vez de encadenar `flex-1 min-h-0` a través de varios contenedores padres. Mismo criterio que ya usaba el log de preguntas en vivo del mismo componente (`maxHeight: 340px`) — más simple y robusto que depender de que todo el árbol flex tenga `min-height: 0` correctamente propagado.
+- **Señal de "hay más"** — fundido sutil en los bordes de la zona scrolleable vía `mask-image: linear-gradient(to bottom, transparent 0, black 12px, black calc(100% - 12px), transparent 100%)`, mismo lenguaje que el fade de borde ya usado en el carrusel de testimonios (fade en vez de flechas/scrollbar como única señal).
+- **Acción principal siempre fija** — el bloque de envío (verificación Turnstile + botón "Enviar por WhatsApp") vive fuera del contenedor scrolleable, en su propia sección con `border-t`, para que nunca quede oculto ni requiera scrollear hasta el final para encontrarlo.
+- **Cuándo reutilizar** — cualquier panel flotante/popover cuyo contenido dependa de datos externos de longitud variable (formularios dinámicos, resúmenes, listas generadas por el usuario) debe capar altura + scroll interno + acción fija, no dejar que el contenido decida el alto del contenedor.
+
 ## Rule going forward
 
 Any new dark-tint rgba literal in this codebase must use `11, 63, 124` (brand-900), never introduce a new arbitrary dark color. Any new light neutral background should pull from the `neutral-*` scale, not a fresh gray. If Evalia issues additional official brand hexes later, treat them as new exact anchors and re-derive only the interpolated steps between them — don't touch the three existing exact anchors (`brand-400/600/900`) or `neutral-200`/`accent-300` without an explicit brand-manual update.

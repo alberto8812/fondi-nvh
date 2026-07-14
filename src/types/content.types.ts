@@ -102,6 +102,11 @@ export interface FaqItem {
   a: string
 }
 
+export interface JobsPageContent {
+  whyFondi: { icon: string; title: string; text: string }[]
+  expectations: string[]
+}
+
 export interface JobApplicationContent {
   greeting: string
   teaser: string

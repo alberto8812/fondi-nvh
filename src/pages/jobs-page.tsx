@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
-import { jobs } from '@/data'
+import { jobs, jobsPage } from '@/data'
 import { Icon, Button, Badge, Eyebrow, cardClassName, cardStyle } from '@/components/ui'
 import { fadeUp, slideInLeft, slideInRight, staggerContainer, staggerItem } from '@/components/motion'
 import { openFondiChat } from '@/lib/chat-bridge'
@@ -9,31 +9,6 @@ import { JobModal } from '@/components/job-modal'
 import type { JobOpening } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
-
-const WHY_FONDI = [
-  {
-    icon: 'education',
-    title: 'Crecimiento profesional',
-    text: 'Formación continua y un camino claro para crecer dentro del equipo.',
-  },
-  {
-    icon: 'shield',
-    title: 'Estabilidad y respaldo',
-    text: 'Una empresa establecida, con procesos claros y respaldo real detrás de cada rol.',
-  },
-  {
-    icon: 'handshake',
-    title: 'Impacto real',
-    text: 'Tu trabajo ayuda todos los días a que más personas accedan al crédito que necesitan.',
-  },
-]
-
-const EXPECTATIONS = [
-  'Actitud comercial',
-  'Orientación al servicio',
-  'Buena presentación personal',
-  'Experiencia en ventas o servicio al cliente',
-]
 
 export function JobsPage() {
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null)
@@ -104,7 +79,7 @@ export function JobsPage() {
             whileInView="visible"
             viewport={VP}
           >
-            {WHY_FONDI.map((item) => (
+            {jobsPage.whyFondi.map((item) => (
               <motion.div
                 key={item.title}
                 variants={staggerItem}
@@ -149,7 +124,7 @@ export function JobsPage() {
             whileInView="visible"
             viewport={VP}
           >
-            {EXPECTATIONS.map((item) => (
+            {jobsPage.expectations.map((item) => (
               <motion.li
                 key={item}
                 variants={staggerItem}
