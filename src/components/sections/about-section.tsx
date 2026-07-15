@@ -1,9 +1,15 @@
-import { motion } from 'motion/react'
-import { about } from '@/data'
-import { Button, Icon } from '@/components/ui'
-import { fadeUp, slideInLeft, slideInRight, staggerContainer, staggerItem } from '@/components/motion'
+import { motion } from "motion/react";
+import { about } from "@/data";
+import { Button, Icon } from "@/components/ui";
+import {
+  fadeUp,
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+  staggerItem,
+} from "@/components/motion";
 
-const VP = { once: true, amount: 0.25 } as const
+const VP = { once: true, amount: 0.25 } as const;
 
 export function AboutSection() {
   return (
@@ -12,35 +18,40 @@ export function AboutSection() {
       className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center bg-brand-900 px-5 sm:px-8 md:px-12 py-14 md:py-[76px]"
     >
       {/* Text — slides from left */}
-      <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={VP}>
+      <motion.div
+        variants={slideInLeft}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VP}
+      >
         <div className="font-mono text-xs tracking-[.14em] uppercase text-brand-300">
           {about.eyebrow}
         </div>
         <h2
           className="font-serif italic font-normal text-on-brand"
           style={{
-            fontSize: 'clamp(28px, 7vw, 38px)',
+            fontSize: "clamp(28px, 7vw, 38px)",
             lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-            textWrap: 'balance',
-            margin: '14px 0 18px',
+            letterSpacing: "-0.02em",
+            textWrap: "balance",
+            margin: "14px 0 18px",
           }}
         >
           {about.headline}
         </h2>
-        <p
+        {/* <p
           className="text-base leading-[1.65] text-brand-200"
           style={{ margin: '0 0 24px' }}
         >
           {about.body}
-        </p>
-        <Button variant="accent" href={about.cta.href}>
+        </p> */}
+        {/* <Button variant="accent" href={about.cta.href}>
           {about.cta.label}
-        </Button>
+        </Button> */}
       </motion.div>
 
       {/* Image — slides from right */}
-      <motion.div
+      {/* <motion.div
         variants={slideInRight}
         initial="hidden"
         whileInView="visible"
@@ -54,11 +65,11 @@ export function AboutSection() {
           style={{ filter: 'saturate(0.88) contrast(1.02)' }}
           loading="lazy"
         />
-      </motion.div>
+      </motion.div> */}
 
       {/* Values — full width, stagger */}
       <motion.div
-        className="col-span-1 md:col-span-2 mt-10 md:mt-14 pt-10 md:pt-12 border-t border-on-brand/10"
+        className="col-span-1 md:col-span-2 mt-2 md:mt-2 pt-2 md:pt-1 "
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -79,19 +90,23 @@ export function AboutSection() {
             >
               <div
                 className="flex items-center justify-center bg-brand-300/15 text-brand-300 ring-1 ring-inset ring-brand-300/20"
-                style={{ width: '46px', height: '46px', borderRadius: '9px' }}
+                style={{ width: "46px", height: "46px", borderRadius: "9px" }}
               >
                 <Icon name={v.icon} size={22} />
               </div>
               <h3
                 className="font-sans font-semibold text-on-brand"
-                style={{ fontSize: '16px', letterSpacing: '-0.01em', margin: '16px 0 6px' }}
+                style={{
+                  fontSize: "16px",
+                  letterSpacing: "-0.01em",
+                  margin: "16px 0 6px",
+                }}
               >
                 {v.title}
               </h3>
               <p
                 className="text-[14px] leading-[1.55] m-0 text-brand-200"
-                style={{ textWrap: 'pretty' }}
+                style={{ textWrap: "pretty" }}
               >
                 {v.text}
               </p>
@@ -100,5 +115,5 @@ export function AboutSection() {
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }

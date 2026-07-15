@@ -23,9 +23,9 @@ export function HomePage() {
       {/* <SimulatorSection /> */}
       <AmountSelectorSection />
       <StepsSection />
-      <ServicesSection />
-      <AboutSection />
+      {/* <ServicesSection /> */}
       <CoverageSection />
+      <AboutSection />
       <TestimonialsSection />
       <VideosSection />
       <FaqSection />

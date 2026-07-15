@@ -56,15 +56,10 @@ export function AmountSelectorSection() {
             }}
           >
             Elige el monto{" "}
-            <span className="font-serif italic font-medium">que necesitas.</span>
+            <span className="font-serif italic font-medium">
+              que te gustaria solicitar.
+            </span>
           </h2>
-          <p
-            className="text-base leading-[1.6] m-0 text-brand-200"
-            style={{ maxWidth: "440px" }}
-          >
-            Selecciona un monto y te asesoramos por WhatsApp en minutos. Sin
-            tasas de ejemplo, sin compromiso.
-          </p>
           <p
             className="text-sm leading-[1.6] mt-3 text-brand-300"
             style={{ maxWidth: "440px" }}
@@ -128,9 +123,7 @@ export function AmountSelectorSection() {
                   fontVariantNumeric: "tabular-nums",
                 }}
               />
-              <div className="text-xs mt-2 text-neutral-500">
-                Sin tasa de ejemplo. Confirmamos las condiciones por WhatsApp.
-              </div>
+
               <Button
                 variant="whatsapp"
                 onClick={() => openFondiChat({ monto: fmt(monto) })}

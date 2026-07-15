@@ -2,21 +2,21 @@
   {
     "n": "01",
     "t": "Elige el monto que deseas solicitar",
-    "d": "Elige entre $500 y $2,000 USD para tu primer crédito. Con un buen historial de pago, podrás acceder a montos mayores en próximas solicitudes."
+    "d": "Tu primer crédito puede ser de $500 a $2,000 USD. Si mantienes un buen historial de pago, podrás solicitar un monto mayor en tu próxima solicitud."
   },
   {
     "n": "02",
     "t": "Inicia tu solicitud por WhatsApp",
-    "d": "Escríbenos y te asignamos un asesor según tu ciudad para acompañarte durante todo el proceso."
+    "d": "Escríbenos y uno de nuestros asesores te dará la bienvenida. Primero confirmaremos la ciudad donde te encuentras para asignarte al asesor más cercano a tu zona."
   },
   {
     "n": "03",
     "t": "Habla con tu asesor",
-    "d": "Tu asesor te llama para explicarte el proceso, resolver tus dudas y coordinar la firma de la documentación."
+    "d": "El asesor más cercano a tu zona, te llamará para explicarte detalladamente el proceso, resolver tus dudas y coordinar la firma de la documentación necesaria para continuar con tu solicitud."
   },
   {
     "n": "04",
     "t": "Recibe el dinero en tu cuenta bancaria",
-    "d": "Una vez aprobada tu solicitud, el desembolso se realiza en menos de 24 horas."
+    "d": "Una vez finalizado el proceso de evaluación y aprobada tu solicitud, el dinero será depositado directamente en tu cuenta bancaria. El desembolso se realiza en menos de 24 horas después de la aprobación. "
   }
 ]
