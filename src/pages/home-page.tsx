@@ -5,7 +5,7 @@ import {
   // SimulatorSection, — sin tasas reales todavía; ver AmountSelectorSection más abajo. Reactivar cuando el producto tenga condiciones definidas.
   AmountSelectorSection,
   StepsSection,
-  ServicesSection,
+  // ServicesSection, — section commented out in the JSX below
   AboutSection,
   CoverageSection,
   TestimonialsSection,

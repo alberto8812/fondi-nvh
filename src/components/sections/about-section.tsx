@@ -1,10 +1,9 @@
 import { motion } from "motion/react";
 import { about } from "@/data";
-import { Button, Icon } from "@/components/ui";
+import { Icon } from "@/components/ui";
 import {
   fadeUp,
   slideInLeft,
-  slideInRight,
   staggerContainer,
   staggerItem,
 } from "@/components/motion";
