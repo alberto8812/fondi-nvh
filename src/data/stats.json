@@ -1,6 +1,19 @@
 [
-  { "v": "+5,000", "l": "créditos otorgados" },
-  { "v": "< 24 h", "l": "tiempo de desembolso" },
-  { "v": "4.9 / 5", "l": "satisfacción de clientes" },
-  { "v": "$0", "l": "por adelantado", "d": "Nunca pedimos dinero para solicitar tu crédito." }
+  {
+    "v": "$0 por adelantado",
+    "l": "Nunca pedimos dinero para solicitar tu crédito.",
+    "d": ""
+  },
+  {
+    "v": "+5,000",
+    "l": "Créditos otorgados"
+  },
+  {
+    "v": "menos de 24 horas",
+    "l": "Para recibir tu dinero"
+  },
+  {
+    "v": "4.9 / 5",
+    "l": "clientes satisfechos"
+  }
 ]

@@ -28,9 +28,9 @@ export function BenefitsSection() {
             textWrap: "balance",
           }}
         >
-          Un crédito pensado para{" "}
-          <span className="font-serif italic font-medium">tu realidad</span>, no
-          para el banco.
+          Beneficios de solicitar{" "}
+          <span className="font-serif italic font-medium">tu credito </span> en
+          Fondi.
         </h2>
       </motion.div>
 

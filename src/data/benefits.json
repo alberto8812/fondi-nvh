@@ -3,48 +3,48 @@
     "n": "01",
     "ic": "dollar-sign",
     "t": "Sin pagos adelantados",
-    "d": "Olvídate de los pagos por adelantado. Comienza tu proceso hoy mismo con $0 de cuota inicial."
+    "d": "Nunca te pediremos dinero para iniciar tu solicitud ni para realizar el análisis de tu crédito.  "
   },
   {
     "n": "02",
     "ic": "briefcase",
     "t": "Proceso sin complicaciones",
-    "d": "Solicita en minutos y avanza sin papeleo excesivo ni trámites innecesarios."
+    "d": "Solo necesitas tener un trabajo estable, un ID, una cuenta de banco y un comprobante de domicilio"
   },
   {
     "n": "03",
     "ic": "handshake",
     "t": "Atención personalizada",
-    "d": "Disponible por WhatsApp con asesores reales que te acompañan en cada paso."
+    "d": "Siempre a disposición por nuestra línea de WhatsApp con asesores reales para ayudarte con tu solicitud de crédito."
   },
   {
     "n": "04",
     "ic": "users",
     "t": "No necesitas fiador",
-    "d": "Accede a tu crédito sin necesidad de un fiador ni avalista."
+    "d": "No solicitamos codeudores "
   },
   {
     "n": "05",
     "ic": "wallet",
     "t": "Modalidad de pago",
-    "d": "Cuotas fijas y cómodas que se ajustan a tu presupuesto."
+    "d": "Cuotas fijas y cómodas que se adaptan a tu ritmo de trabajo."
   },
   {
     "n": "06",
     "ic": "clock",
     "t": "Desembolsos rápidos",
-    "d": "Recibe tu dinero en menos de 24 horas tras la aprobación."
+    "d": "El dinero llega directamente a tu cuenta en menos de 24 horas."
   },
   {
     "n": "07",
     "ic": "badge",
-    "t": "Sin SSN ni historial crediticio",
-    "d": "No necesitas Seguro Social ni historial crediticio en Estados Unidos."
+    "t": "Sin Social Security Number ni historial crediticio",
+    "d": "No solicitamos tu Social Security Number (SSN) ni realizamos consultas a tu historial crediticio como parte de nuestro proceso de evaluación."
   },
   {
     "n": "08",
     "ic": "shield",
     "t": "Tus datos están protegidos",
-    "d": "Proceso transparente, sin costos ocultos ni letra pequeña. Tu información siempre segura."
+    "d": "Tu información será utilizada únicamente para evaluar tu solicitud de crédito y se manejará de forma segura y confidencial."
   }
 ]
