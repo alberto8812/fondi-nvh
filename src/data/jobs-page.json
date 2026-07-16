@@ -17,9 +17,9 @@
     }
   ],
   "expectations": [
-    "Actitud comercial",
-    "Orientación al servicio",
-    "Buena presentación personal",
-    "Experiencia en ventas o servicio al cliente"
+    { "icon": "graph-up", "label": "Actitud comercial" },
+    { "icon": "headset", "label": "Orientación al servicio" },
+    { "icon": "shirt", "label": "Buena presentación personal" },
+    { "icon": "chat", "label": "Experiencia en ventas o servicio al cliente" }
   ]
 }

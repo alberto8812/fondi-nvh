@@ -28,18 +28,18 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram @fondi.financial"
-                className="text-brand-300 hover:text-on-brand transition-colors"
+                className="flex items-center justify-center w-11 h-11 rounded-full border border-brand-300/30 text-brand-200 transition-colors hover:bg-on-brand hover:border-on-brand hover:text-brand-900"
               >
-                <Icon name="instagram" size={25} />
+                <Icon name="instagram" size={22} />
               </a>
               <a
                 href={contact.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook Fondi US"
-                className="text-brand-300 hover:text-on-brand transition-colors"
+                className="flex items-center justify-center w-11 h-11 rounded-full border border-brand-300/30 text-brand-200 transition-colors hover:bg-on-brand hover:border-on-brand hover:text-brand-900"
               >
-                <Icon name="facebook" size={25} />
+                <Icon name="facebook" size={22} />
               </a>
             </div>
           </div>
@@ -94,7 +94,7 @@ export function Footer() {
             </div>
             <div className="flex flex-col gap-2.5 text-[14.5px] text-brand-200">
               {coverage.requirements.map((req) => (
-                <span key={req}>{req}</span>
+                <span key={req.label}>{req.label}</span>
               ))}
             </div>
           </div>

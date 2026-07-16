@@ -24,12 +24,12 @@ export function CareersExpectationsSection() {
       >
         {jobsPage.expectations.map((item) => (
           <motion.li
-            key={item}
+            key={item.label}
             variants={staggerItem}
             className="flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 p-4"
           >
-            <IconChip icon="badge" size={32} iconSize={16} className="shrink-0" />
-            <p className="text-[14px] text-neutral-700 m-0">{item}</p>
+            <IconChip icon={item.icon} size={32} className="shrink-0" />
+            <p className="text-[14px] text-neutral-700 m-0">{item.label}</p>
           </motion.li>
         ))}
       </motion.ul>

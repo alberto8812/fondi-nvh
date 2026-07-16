@@ -54,10 +54,10 @@ export function BenefitsSection() {
           >
             <div className="flex justify-between items-start">
               <div
-                className="flex items-center justify-center bg-brand-900 text-brand-300"
-                style={{ width: "46px", height: "46px", borderRadius: "9px" }}
+                className="flex items-center justify-center text-brand-900"
+                style={{ width: "46px", height: "46px" }}
               >
-                <Icon name={b.ic} size={22} />
+                <Icon name={b.ic} size={32} />
               </div>
               <span
                 className="font-serif italic text-brand-300"

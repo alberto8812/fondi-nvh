@@ -88,10 +88,10 @@ export function AboutSection() {
               className="rounded-lg border border-on-brand/10 bg-on-brand/[0.04] p-5"
             >
               <div
-                className="flex items-center justify-center bg-brand-300/15 text-brand-300 ring-1 ring-inset ring-brand-300/20"
-                style={{ width: "46px", height: "46px", borderRadius: "9px" }}
+                className="flex items-center justify-center text-brand-200"
+                style={{ width: "46px", height: "46px" }}
               >
-                <Icon name={v.icon} size={22} />
+                <Icon name={v.icon} size={32} />
               </div>
               <h3
                 className="font-sans font-semibold text-on-brand"

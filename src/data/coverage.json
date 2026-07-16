@@ -12,10 +12,10 @@
     { "city": "New Jersey", "region": "Estados Unidos" }
   ],
   "requirements": [
-    "Tener trabajo estable",
-    "Documento de Identificación",
-    "Cuenta bancaria personal de Estados Unidos",
-    "Comprobante de domicilio",
-    "Número de celular"
+    { "icon": "briefcase", "label": "Tener trabajo estable" },
+    { "icon": "id-card", "label": "Documento de Identificación" },
+    { "icon": "bank", "label": "Cuenta bancaria personal de Estados Unidos" },
+    { "icon": "home", "label": "Comprobante de domicilio" },
+    { "icon": "smartphone", "label": "Número de celular" }
   ]
 }

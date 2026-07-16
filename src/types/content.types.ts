@@ -52,7 +52,7 @@ export interface CoverageContent {
   headline: string
   intro: string
   locations: { city: string; region: string }[]
-  requirements: string[]
+  requirements: { icon: string; label: string }[]
 }
 
 export interface AboutContent {
@@ -104,7 +104,7 @@ export interface FaqItem {
 
 export interface JobsPageContent {
   whyFondi: { icon: string; title: string; text: string }[]
-  expectations: string[]
+  expectations: { icon: string; label: string }[]
 }
 
 export interface JobApplicationContent {

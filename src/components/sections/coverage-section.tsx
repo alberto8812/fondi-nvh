@@ -63,10 +63,10 @@ export function CoverageSection() {
               className="flex items-center gap-3 rounded-lg border border-brand-900/10 bg-brand-50 p-4"
             >
               <div
-                className="flex items-center justify-center bg-brand-300/15 text-brand-700 ring-1 ring-inset ring-brand-300/20 shrink-0"
-                style={{ width: '38px', height: '38px', borderRadius: '9px' }}
+                className="flex items-center justify-center text-brand-900 shrink-0"
+                style={{ width: '38px', height: '38px' }}
               >
-                <Icon name="map-pin" size={18} />
+                <Icon name="map-pin" size={26} />
               </div>
               <div>
                 <p className="font-sans font-medium text-brand-900 m-0" style={{ fontSize: '14px' }}>
@@ -104,18 +104,18 @@ export function CoverageSection() {
         >
           {coverage.requirements.map((req) => (
             <motion.li
-              key={req}
+              key={req.label}
               variants={staggerItem}
               className="flex items-center gap-3 rounded-lg border border-brand-900/10 bg-brand-50 p-4"
             >
               <div
-                className="flex items-center justify-center bg-brand-300/15 text-brand-700 ring-1 ring-inset ring-brand-300/20 shrink-0"
-                style={{ width: '32px', height: '32px', borderRadius: '9px' }}
+                className="flex items-center justify-center text-brand-900 shrink-0"
+                style={{ width: '32px', height: '32px' }}
               >
-                <Icon name="badge" size={16} />
+                <Icon name={req.icon} size={22} />
               </div>
               <p className="text-brand-800 m-0" style={{ fontSize: '14px' }}>
-                {req}
+                {req.label}
               </p>
             </motion.li>
           ))}
