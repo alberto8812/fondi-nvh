@@ -3,7 +3,6 @@ import { motion } from 'motion/react'
 import { testimonials } from '@/data'
 import { fadeUp, EASE } from '@/components/motion'
 import { TestimonialModal } from '@/components/testimonial-modal'
-import { Container } from '@/components/ui'
 import type { Testimonial } from '@/types/content.types'
 
 const VP = { once: true, amount: 0.2 } as const
@@ -49,8 +48,12 @@ export function TestimonialsSection() {
   return (
     <>
       <section className="bg-neutral-50 py-14 md:py-[76px] overflow-hidden">
-      {/* Header */}
-      <Container>
+      {/* Header — deliberately NOT wrapped in Container: the card track below is
+          full-bleed with its own pl-5/sm:pl-8/md:pl-12 edge padding, not centered
+          in the 1280px content column. Matching that same padding here keeps the
+          title flush with the first card's left edge instead of drifting to the
+          (wider, centered) Container inset on large viewports. */}
+      <div className="pl-5 pr-5 sm:pl-8 sm:pr-8 md:pl-12 md:pr-12">
       <motion.div
         className="flex items-end justify-between gap-6"
         variants={fadeUp}
@@ -77,10 +80,15 @@ export function TestimonialsSection() {
           </h2>
         </div>
       </motion.div>
-      </Container>
+      </div>
 
       {/* Track — intentionally full-bleed (not wrapped in Container) so the
-          horizontal scroll can use edge padding as scroll start/end spacing */}
+          horizontal scroll can use edge padding as scroll start/end spacing.
+          Outer div reserves a STATIC gutter (not scrollable) for the arrows when
+          hasOverflow — cards live only inside the inner track and can never reach
+          under an arrow, unlike scroll-padding which only clears the track at the
+          two scroll extremes. */}
+      <div className={`relative ${hasOverflow ? 'sm:pl-20 sm:pr-20 md:pl-24 md:pr-24' : ''}`}>
       <div className="relative">
         <div
           ref={trackRef}
@@ -88,11 +96,7 @@ export function TestimonialsSection() {
           tabIndex={0}
           role="region"
           aria-label="Testimonios de clientes"
-          className={`flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pl-5 pr-5 scroll-pl-5 scroll-pr-5 pb-1 focus:outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-            hasOverflow
-              ? 'sm:pl-20 sm:pr-20 sm:scroll-pl-20 sm:scroll-pr-20 md:pl-24 md:pr-24 md:scroll-pl-24 md:scroll-pr-24'
-              : 'sm:pl-8 sm:pr-8 sm:scroll-pl-8 sm:scroll-pr-8 md:pl-12 md:pr-12 md:scroll-pl-12 md:scroll-pr-12'
-          }`}
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pl-5 pr-5 scroll-pl-5 scroll-pr-5 sm:pl-8 sm:pr-8 sm:scroll-pl-8 sm:scroll-pr-8 md:pl-12 md:pr-12 md:scroll-pl-12 md:scroll-pr-12 pb-1 focus:outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {testimonials.map((t, i) => (
             <motion.div
@@ -165,23 +169,27 @@ export function TestimonialsSection() {
         {scrollState.next && (
           <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-neutral-50 to-transparent" />
         )}
-
-        {/* Side nav arrows — float over the track edges, vertically centered on the cards */}
-        {hasOverflow && (
-          <>
-            <div className="hidden sm:flex absolute inset-y-0 left-2 md:left-4 items-center z-10">
-              <NavButton direction="prev" disabled={!scrollState.prev} onClick={() => scrollByCard(-1)} />
-            </div>
-            <div className="hidden sm:flex absolute inset-y-0 right-2 md:right-4 items-center z-10">
-              <NavButton direction="next" disabled={!scrollState.next} onClick={() => scrollByCard(1)} />
-            </div>
-          </>
-        )}
       </div>
 
-      {/* Scroll progress — replaces dot pagination with a position hairline */}
+      {/* Side nav arrows — live in the outer div's static gutter, entirely outside
+          the inner track's box, so a card can never scroll underneath them */}
       {hasOverflow && (
-        <Container className="mt-6">
+        <>
+          <div className="hidden sm:flex absolute inset-y-0 left-2 md:left-4 items-center z-10">
+            <NavButton direction="prev" disabled={!scrollState.prev} onClick={() => scrollByCard(-1)} />
+          </div>
+          <div className="hidden sm:flex absolute inset-y-0 right-2 md:right-4 items-center z-10">
+            <NavButton direction="next" disabled={!scrollState.next} onClick={() => scrollByCard(1)} />
+          </div>
+        </>
+      )}
+      </div>
+
+      {/* Scroll progress — replaces dot pagination with a position hairline.
+          Same edge padding as the header above, not Container, so it stays
+          flush with the title and the first card. */}
+      {hasOverflow && (
+        <div className="mt-6 pl-5 pr-5 sm:pl-8 sm:pr-8 md:pl-12 md:pr-12">
           <div className="relative h-[3px] w-full max-w-[120px] bg-neutral-200 rounded-full overflow-hidden">
             <div
               className="absolute inset-y-0 left-0 bg-brand-900 rounded-full transition-[left] duration-150 ease-out"
@@ -191,7 +199,7 @@ export function TestimonialsSection() {
               }}
             />
           </div>
-        </Container>
+        </div>
       )}
       </section>
 
@@ -215,7 +223,7 @@ function NavButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === 'prev' ? 'Testimonio anterior' : 'Siguiente testimonio'}
-      className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-neutral-50 text-brand-900 shadow-[0_2px_10px_rgba(15,23,42,0.12)] transition-all duration-150 hover:border-brand-300 hover:bg-brand-50 active:scale-95 disabled:opacity-30 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+      className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-neutral-50 text-brand-900 shadow-[0_2px_10px_rgba(11,63,124,0.12)] transition-all duration-150 hover:border-brand-300 hover:bg-brand-50 active:scale-95 disabled:opacity-30 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         {direction === 'prev' ? <path d="M15 6l-6 6 6 6" /> : <path d="M9 6l6 6-6 6" />}
