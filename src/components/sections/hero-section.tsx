@@ -60,12 +60,10 @@ export function HeroSection() {
           pinned to the viewport edge (own padding) instead of centering
           inside the sitewide 1280px column like every other section. */}
       <div className="relative w-full flex flex-col px-5 sm:px-8 md:px-12 pt-24 pb-8 md:pt-24 md:pb-[104px] max-w-[640px]">
-        {/* Beat 1 — eyebrow (reserves its space now, reveals at 4s).
-            Desktop/tablet position: above the headline. Hidden on mobile,
-            where it re-appears above the subline instead (see below). */}
-        <motion.div {...beat(0.7)} className="hidden sm:block">
-          <div className="font-sans font-bold text-xs font-medium tracking-[.14em] uppercase flex items-center gap-2 text-on-brand">
-            <span className="w-[15px] h-px bg-white" />
+        {/* Beat 1 — eyebrow (reserves its space now, reveals at 4s) */}
+        <motion.div {...beat(0.7)}>
+          <div className="pl-1.5 sm:pl-0 font-sans font-bold text-xs font-medium tracking-[.14em] uppercase flex items-center gap-2 text-on-brand">
+            <span className="w-[22px] h-px bg-white" />
             {hero.eyebrow}
           </div>
         </motion.div>
@@ -91,15 +89,6 @@ export function HeroSection() {
         {/* Beat 3 — subline + CTA group: pinned to the bottom of the hero on
             mobile (mt-auto), where it sat naturally in the flow before */}
         <div className="mt-auto sm:mt-0">
-          {/* Mobile-only eyebrow: same content, re-positioned above the
-              subline instead of above the headline */}
-          <motion.div {...beat(0.7)} className="sm:hidden">
-            <div className="pl-1.5 font-sans font-bold text-xs font-medium tracking-[.14em] uppercase flex items-center gap-2 text-on-brand">
-              <span className="w-[22px] h-px bg-white" />
-              {hero.eyebrow}
-            </div>
-          </motion.div>
-
           <motion.p
             {...beat(0.5)}
             className="pl-1.5 sm:pl-0 font-sans text-on-brand"
