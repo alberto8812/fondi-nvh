@@ -23,24 +23,30 @@ export function Footer() {
               Estamos disponibles para apoyarte cuando más lo necesitas.Te
               invitamos a seguirnos en nuestras redes sociales:
             </p>
-            <div className="flex gap-3 mt-5">
+            <div className="flex flex-col gap-3 mt-5 max-w-[280px]">
               <a
                 href={contact.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram @fondi.financial"
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-brand-300/30 text-brand-200 transition-colors hover:bg-on-brand hover:border-on-brand hover:text-brand-900"
+                aria-label={`Instagram ${contact.social.instagramHandle}`}
+                className="flex items-center gap-3 no-underline text-brand-200 transition-colors hover:text-on-brand"
               >
-                <Icon name="instagram" size={22} />
+                <span className="flex items-center justify-center w-11 h-11 shrink-0 rounded-full border border-brand-300/30">
+                  <Icon name="instagram" size={20} />
+                </span>
+                <span className="text-[14.5px]">{contact.social.instagramHandle}</span>
               </a>
               <a
                 href={contact.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook Fondi US"
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-brand-300/30 text-brand-200 transition-colors hover:bg-on-brand hover:border-on-brand hover:text-brand-900"
+                aria-label={`Facebook ${contact.social.facebookHandle}`}
+                className="flex items-center gap-3 no-underline text-brand-200 transition-colors hover:text-on-brand"
               >
-                <Icon name="facebook" size={22} />
+                <span className="flex items-center justify-center w-11 h-11 shrink-0 rounded-full border border-brand-300/30">
+                  <Icon name="facebook" size={20} />
+                </span>
+                <span className="text-[14.5px]">{contact.social.facebookHandle}</span>
               </a>
             </div>
           </div>

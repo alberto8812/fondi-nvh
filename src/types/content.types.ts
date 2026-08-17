@@ -130,5 +130,5 @@ export interface ContactContent {
   teaser: string
   questions: ContactQuestion[]
   email: string
-  social: { instagram: string; facebook: string }
+  social: { instagram: string; instagramHandle: string; facebook: string; facebookHandle: string }
 }

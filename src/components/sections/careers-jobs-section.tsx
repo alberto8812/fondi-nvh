@@ -4,7 +4,6 @@ import { jobs } from '@/data'
 import { Icon, Button, Badge, Eyebrow, cardClassName, cardStyle } from '@/components/ui'
 import { fadeUp, staggerContainer, staggerItem } from '@/components/motion'
 import { openFondiChat } from '@/lib/chat-bridge'
-import { formatDate } from '@/lib/format'
 import { JobModal } from '@/components/job-modal'
 import type { JobOpening } from '@/types/content.types'
 
@@ -71,20 +70,22 @@ export function CareersJobsSection() {
                     >
                       {job.title}
                     </h3>
-                    <Badge>{job.modality}</Badge>
+                    <div className="flex flex-col items-end gap-1.5 shrink-0">
+                      <Badge>{job.modality}</Badge>
+                      {job.active && (
+                        <Badge className="text-green-700 bg-green-100">
+                          <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-green-700 mr-1.5" />
+                          Activo
+                        </Badge>
+                      )}
+                    </div>
                   </div>
 
                   {/* Meta demoted to one quiet line — location is the only
-                      fact that varies per card; the publish date is
-                      lower-priority still, so it rides along in the same
-                      tier instead of claiming its own row. */}
+                      fact that varies per card. */}
                   <div className="flex items-center gap-1.5 mt-2.5 text-[13px] text-neutral-500">
                     <Icon name="map-pin" size={14} />
                     <span>{job.location}</span>
-                    <span aria-hidden className="text-neutral-300">
-                      ·
-                    </span>
-                    <span>Publicado el {formatDate(job.publishedAt)}</span>
                   </div>
 
                   {/* Salary is the one fact that actually sells a

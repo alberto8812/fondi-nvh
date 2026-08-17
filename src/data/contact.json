@@ -3,9 +3,9 @@
   "headline": "Da el primer paso",
   "headlineItalic": "hoy.",
   "subtext": "Déjanos tus datos y un asesor te contactará… O escríbenos directamente por WhatsApp. Estamos listos para atenderte. ",
-  "phone": "+1 555-988-9513",
-  "telHref": "tel:+15559889513",
-  "waNumber": "+15559889513",
+  "phone": "+1 210-440-9069",
+  "telHref": "tel:+12104409069",
+  "waNumber": "+12104409069",
   "waIntro": "Hola, quiero información sobre un crédito. Mis datos:",
   "assistantName": "Ana",
   "assistantRole": "Asesora Fondi",
@@ -41,6 +41,8 @@
   "email": "contacto@fondi.us",
   "social": {
     "instagram": "https://www.instagram.com/fondi.financial/profilecard/?igsh=MW0xbjl5enJ3cmFlOA%3D%3D",
-    "facebook": "https://www.facebook.com/people/Fondi-US/61587120731150/"
+    "instagramHandle": "@fondi.financial",
+    "facebook": "https://www.facebook.com/people/Fondi-US/61587120731150/",
+    "facebookHandle": "Fondi US"
   }
 }
