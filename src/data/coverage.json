@@ -26,32 +26,29 @@
     {
       "city": "Austin",
       "region": "Texas"
-    },
-    {
-      "city": "New Jersey",
-      "region": "Estados Unidos"
     }
   ],
   "requirements": [
     {
       "icon": "briefcase",
-      "label": "Tener trabajo estable"
+      "label": "Tener un empleo fijo en una empresa o agencia"
     },
     {
       "icon": "id-card",
-      "label": "Documento de Identificación"
+      "label": "Documento de identificación"
     },
     {
       "icon": "bank",
       "label": "Cuenta bancaria personal de Estados Unidos"
     },
     {
-      "icon": "home",
-      "label": "Comprobante de domicilio"
+      "icon": "shield-lock",
+      "label": "Número de ruta"
     },
     {
       "icon": "smartphone",
       "label": "Número de celular"
     }
-  ]
+  ],
+  "requirementsNote": "IMPORTANTE: Tu número de cuenta y ruta se solicitan únicamente para poder realizar el desembolso. Para tu tranquilidad, ten presente que con estos datos no se pueden realizar operaciones."
 }

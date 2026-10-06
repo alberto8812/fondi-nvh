@@ -5,7 +5,17 @@ import { fadeUp, staggerContainer, staggerItem } from "@/components/motion";
 
 const VP = { once: true, amount: 0.25 } as const;
 
+function splitNote(note: string) {
+  const idx = note.indexOf(":");
+  if (idx === -1) return { label: "", body: note };
+  return { label: note.slice(0, idx + 1), body: note.slice(idx + 1).trimStart() };
+}
+
 export function CoverageSection() {
+  const note = coverage.requirementsNote
+    ? splitNote(coverage.requirementsNote)
+    : null;
+
   return (
     <section id="cobertura" className="py-14 md:py-[76px]">
       <Container>
@@ -137,6 +147,29 @@ export function CoverageSection() {
               </motion.li>
             ))}
           </motion.ul>
+
+          {note && (
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VP}
+              role="note"
+              className="mt-6 rounded-lg border border-accent-500/50 border-l-4 border-l-accent-700 bg-accent-100 px-4 py-4 sm:px-5"
+            >
+              <p
+                className="text-brand-800 m-0 leading-[1.6] break-words"
+                style={{ fontSize: "14px" }}
+              >
+                {note.label && (
+                  <strong className="font-semibold text-brand-900">
+                    {note.label}
+                  </strong>
+                )}{" "}
+                {note.body}
+              </p>
+            </motion.div>
+          )}
         </motion.div>
       </Container>
     </section>

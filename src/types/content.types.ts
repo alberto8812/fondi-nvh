@@ -53,6 +53,8 @@ export interface CoverageContent {
   intro: string
   locations: { city: string; region: string }[]
   requirements: { icon: string; label: string }[]
+  /** Highlighted note shown below the requirements list. A leading "LABEL:" prefix is rendered in bold. */
+  requirementsNote?: string
 }
 
 export interface AboutContent {
