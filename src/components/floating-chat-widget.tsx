@@ -4,6 +4,16 @@ import { motion, AnimatePresence } from 'motion/react'
 import { contact, jobApplication, jobs } from '@/data'
 import { Button } from '@/components/ui'
 import { CHAT_OPEN_EVENT, type ChatOpenSeed } from '@/lib/chat-bridge'
+import {
+  applyAnswer,
+  createLinearFlow,
+  currentNode,
+  flowStatus,
+  startPath,
+  summarize,
+  type ChatFlow,
+  type PathEntry,
+} from '@/lib/chat-flow'
 
 const PANEL_EASE = [0.23, 1, 0.32, 1] as const
 
@@ -52,7 +62,7 @@ function TypingDots() {
 
 function BotBubble({ children }: { children: React.ReactNode }) {
   return (
-    <div className="self-start max-w-[82%] rounded-2xl rounded-bl-sm bg-neutral-100 text-neutral-700 text-[13.5px] leading-[1.5] px-3.5 py-2.5">
+    <div className="self-start max-w-[82%] rounded-2xl rounded-bl-sm bg-neutral-100 text-neutral-700 text-[13.5px] leading-[1.5] px-3.5 py-2.5 whitespace-pre-line">
       {children}
     </div>
   )
@@ -68,39 +78,33 @@ function UserBubble({ children }: { children: React.ReactNode }) {
 
 type ChatMode = 'loan' | 'application'
 
-interface WidgetQuestion {
-  id: string
-  label: string
-  type: 'text' | 'boolean' | 'choice'
-  options?: string[]
-}
-
 interface ChatState {
   open: boolean
   teaser: 'pending' | 'shown' | 'dismissed'
   mode: ChatMode
   jobTitle?: string
-  questions: WidgetQuestion[]
-  step: number
-  answers: Record<string, string>
+  flow: ChatFlow
+  path: PathEntry[]
   inputValue: string
   typing: boolean
-  done: boolean
   monto?: string
   turnstileToken: string | null
 }
 
 const VACANTE_QUESTION_ID = 'vacante'
+// Short option labels (Sí / No / Me falta uno) render as wrapping pills;
+// longer ones (job titles) stack as full-width rows.
+const PILL_LABEL_MAX = 14
 
 function activeJobTitles() {
   return jobs.filter((job) => job.active).map((job) => `${job.title} — ${job.location}`)
 }
 
-function buildQuestions(mode: ChatMode, jobTitle: string | undefined): WidgetQuestion[] {
-  if (mode === 'loan') return contact.questions
-  if (jobTitle) return jobApplication.questions
+function buildFlow(mode: ChatMode, jobTitle: string | undefined): ChatFlow {
+  if (mode === 'loan') return createLinearFlow(contact.questions)
+  if (jobTitle) return createLinearFlow(jobApplication.questions)
   const options = activeJobTitles()
-  return [
+  return createLinearFlow([
     {
       id: VACANTE_QUESTION_ID,
       label: '¿A qué vacante te gustaría postularte?',
@@ -108,21 +112,20 @@ function buildQuestions(mode: ChatMode, jobTitle: string | undefined): WidgetQue
       options: options.length ? options : ['Otra vacante'],
     },
     ...jobApplication.questions,
-  ]
+  ])
 }
 
 function initialState(mode: ChatMode, jobTitle?: string): ChatState {
+  const flow = buildFlow(mode, jobTitle)
   return {
     open: false,
     teaser: 'pending',
     mode,
     jobTitle,
-    questions: buildQuestions(mode, jobTitle),
-    step: 0,
-    answers: {},
+    flow,
+    path: startPath(flow),
     inputValue: '',
     typing: true,
-    done: false,
     turnstileToken: null,
   }
 }
@@ -166,7 +169,7 @@ export function FloatingChatWidget() {
 
       setChat((prev) => {
         const contextChanged = prev.mode !== mode || prev.jobTitle !== jobTitle
-        const shouldReset = contextChanged || prev.done
+        const shouldReset = contextChanged || flowStatus(prev.flow, prev.path) !== 'active'
 
         if (shouldReset) {
           return {
@@ -189,20 +192,24 @@ export function FloatingChatWidget() {
     return () => window.removeEventListener(CHAT_OPEN_EVENT, openFromEvent)
   }, [])
 
+  const status = flowStatus(chat.flow, chat.path)
+  const isReview = status === 'review'
+  const pathLength = chat.path.length
+
   useEffect(() => {
     if (!chat.open || !chat.typing) return
     const t = setTimeout(() => setChat((prev) => ({ ...prev, typing: false })), 650)
     return () => clearTimeout(t)
-  }, [chat.open, chat.typing, chat.step, chat.done])
+  }, [chat.open, chat.typing, pathLength, status])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-  }, [chat.step, chat.done, chat.typing])
+  }, [pathLength, status, chat.typing])
 
   // Client-side only: no backend to verify the token server-side, so this only
   // filters headless/simple bots, not a bot that calls the wa.me link directly.
   useEffect(() => {
-    if (!chat.open || !chat.done) return
+    if (!chat.open || !isReview) return
     setChat((prev) => (prev.turnstileToken === null ? prev : { ...prev, turnstileToken: null }))
 
     let cancelled = false
@@ -234,26 +241,25 @@ export function FloatingChatWidget() {
         turnstileWidgetIdRef.current = null
       }
     }
-  }, [chat.open, chat.done])
+  }, [chat.open, isReview])
 
-  const currentQuestion = chat.questions[chat.step]
+  const node = currentNode(chat.flow, chat.path)
+  const input = status === 'active' ? node?.input : undefined
+  const summary = summarize(chat.flow, chat.path)
   const isApplication = chat.mode === 'application'
   const greeting = isApplication ? jobApplication.greeting : contact.greeting
   const teaserText = isApplication ? jobApplication.teaser : contact.teaser
 
   function answer(value: string) {
-    const trimmed = value.trim()
-    if (!trimmed || !currentQuestion) return
-    const nextAnswers = { ...chat.answers, [currentQuestion.id]: trimmed }
-    const isLast = chat.step + 1 >= chat.questions.length
+    const nextPath = applyAnswer(chat.flow, chat.path, value)
+    if (nextPath === chat.path || !node) return
+    const answered = nextPath.find((entry) => entry.nodeId === node.id)?.answer
     setChat((prev) => ({
       ...prev,
-      step: isLast ? prev.step : prev.step + 1,
-      answers: nextAnswers,
-      jobTitle: currentQuestion.id === VACANTE_QUESTION_ID ? trimmed : prev.jobTitle,
+      path: nextPath,
+      jobTitle: node.id === VACANTE_QUESTION_ID && answered ? answered : prev.jobTitle,
       inputValue: '',
       typing: true,
-      done: isLast,
     }))
   }
 
@@ -263,15 +269,15 @@ export function FloatingChatWidget() {
           ? jobApplication.waIntroTemplate.replace('{jobTitle}', chat.jobTitle)
           : jobApplication.waIntroGeneric,
         '',
-        ...chat.questions
-          .filter((q) => q.id !== VACANTE_QUESTION_ID)
-          .map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
+        ...summary
+          .filter((item) => item.nodeId !== VACANTE_QUESTION_ID)
+          .map((item) => `${item.label}: ${item.value}`),
       ].join('\n')
     : [
         contact.waIntro,
         '',
         ...(chat.monto ? [`Monto solicitado: ${chat.monto}`, ''] : []),
-        ...chat.questions.map((q) => `${q.label}: ${chat.answers[q.id] ?? ''}`),
+        ...summary.map((item) => `${item.label}: ${item.value}`),
       ].join('\n')
   const waHref = `https://wa.me/${contact.waNumber}?text=${encodeURIComponent(waText)}`
 
@@ -315,7 +321,7 @@ export function FloatingChatWidget() {
             </div>
 
             <AnimatePresence mode="wait">
-              {chat.done ? (
+              {isReview ? (
                 <motion.div
                   key="summary"
                   initial={{ opacity: 0, y: 8 }}
@@ -323,6 +329,13 @@ export function FloatingChatWidget() {
                   transition={{ duration: 0.25, ease: PANEL_EASE }}
                   className="flex flex-col"
                 >
+                  {node && !node.input && node.messages.length > 0 && (
+                    <div className="flex flex-col gap-2.5 px-4 pt-4 shrink-0">
+                      {node.messages.map((message, i) => (
+                        <BotBubble key={i}>{message}</BotBubble>
+                      ))}
+                    </div>
+                  )}
                   <p className="text-[13.5px] leading-[1.6] m-0 px-4 pt-4 pb-3 text-neutral-600 shrink-0">
                     Revisa tus respuestas antes de enviarlas:
                   </p>
@@ -345,10 +358,10 @@ export function FloatingChatWidget() {
                         <span className="text-brand-900 font-medium">{chat.monto}</span>
                       </li>
                     )}
-                    {chat.questions.map((q) => (
-                      <li key={q.id} className="flex flex-col gap-0.5 py-2 border-b border-neutral-100 last:border-0">
-                        <span className="text-[11.5px] text-neutral-400">{q.label}</span>
-                        <span className="text-brand-900 font-medium">{chat.answers[q.id]}</span>
+                    {summary.map((item) => (
+                      <li key={item.nodeId} className="flex flex-col gap-0.5 py-2 border-b border-neutral-100 last:border-0">
+                        <span className="text-[11.5px] text-neutral-400">{item.label}</span>
+                        <span className="text-brand-900 font-medium">{item.value}</span>
                       </li>
                     ))}
                   </ul>
@@ -380,74 +393,77 @@ export function FloatingChatWidget() {
                     style={{ maxHeight: '340px', overflowY: 'auto' }}
                   >
                     <BotBubble>{greeting}</BotBubble>
-                    {chat.questions.slice(0, chat.step).map((q) => (
-                      <div key={q.id} className="flex flex-col gap-2.5">
-                        <BotBubble>{q.label}</BotBubble>
-                        <UserBubble>{chat.answers[q.id]}</UserBubble>
-                      </div>
-                    ))}
-                    {chat.typing ? (
-                      <TypingDots />
-                    ) : (
-                      currentQuestion && <BotBubble>{currentQuestion.label}</BotBubble>
-                    )}
+                    {chat.path.map((entry, i) => {
+                      const isCurrent = i === chat.path.length - 1
+                      if (isCurrent && chat.typing) return <TypingDots key={`${entry.nodeId}-${i}`} />
+                      return (
+                        <div key={`${entry.nodeId}-${i}`} className="flex flex-col gap-2.5">
+                          {chat.flow.nodes[entry.nodeId]?.messages.map((message, j) => (
+                            <BotBubble key={j}>{message}</BotBubble>
+                          ))}
+                          {entry.answer !== undefined && <UserBubble>{entry.answer}</UserBubble>}
+                        </div>
+                      )
+                    })}
                     <div ref={bottomRef} />
                   </div>
 
-                  <div className="px-3 py-3 border-t border-neutral-100">
-                    {chat.typing ? (
-                      <div className="h-10" />
-                    ) : currentQuestion?.type === 'boolean' ? (
-                      <div className="flex gap-2">
-                        {['Sí', 'No'].map((option) => (
-                          <button
-                            key={option}
-                            onClick={() => answer(option)}
-                            className="font-medium text-sm px-5 py-2.5 rounded-full cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    ) : currentQuestion?.type === 'choice' ? (
-                      <div className="flex flex-col gap-2">
-                        {(currentQuestion.options ?? []).map((option) => (
-                          <button
-                            key={option}
-                            onClick={() => answer(option)}
-                            className="font-medium text-sm px-4 py-2.5 rounded-lg text-left cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    ) : (
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault()
-                          answer(chat.inputValue)
-                        }}
-                        className="flex gap-2"
-                      >
-                        <input
-                          autoFocus
-                          type="text"
-                          value={chat.inputValue}
-                          onChange={(e) => setChat((prev) => ({ ...prev, inputValue: e.target.value }))}
-                          placeholder="Escribe tu respuesta..."
-                          className="fondi-input flex-1 rounded-md text-[14px] font-sans border border-neutral-300 bg-neutral-50 text-brand-900"
-                          style={{ padding: '9px 12px' }}
-                        />
-                        <button
-                          type="submit"
-                          aria-label="Enviar respuesta"
-                          className="shrink-0 flex items-center justify-center w-10 h-10 rounded-md bg-brand-900 text-on-brand cursor-pointer hover:bg-brand-800 transition-colors duration-200"
+                  {status === 'active' && (
+                    <div className="px-3 py-3 border-t border-neutral-100">
+                      {chat.typing || !input ? (
+                        <div className="h-10" />
+                      ) : input.kind === 'options' && input.options.every((o) => o.label.length <= PILL_LABEL_MAX) ? (
+                        <div className="flex flex-wrap gap-2">
+                          {input.options.map((option) => (
+                            <button
+                              key={option.label}
+                              onClick={() => answer(option.label)}
+                              className="font-medium text-sm px-5 py-2.5 rounded-full cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      ) : input.kind === 'options' ? (
+                        <div className="flex flex-col gap-2">
+                          {input.options.map((option) => (
+                            <button
+                              key={option.label}
+                              onClick={() => answer(option.label)}
+                              className="font-medium text-sm px-4 py-2.5 rounded-lg text-left cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault()
+                            answer(chat.inputValue)
+                          }}
+                          className="flex gap-2"
                         >
-                          <SendIcon />
-                        </button>
-                      </form>
-                    )}
-                  </div>
+                          <input
+                            autoFocus
+                            type="text"
+                            value={chat.inputValue}
+                            onChange={(e) => setChat((prev) => ({ ...prev, inputValue: e.target.value }))}
+                            placeholder="Escribe tu respuesta..."
+                            className="fondi-input flex-1 rounded-md text-[14px] font-sans border border-neutral-300 bg-neutral-50 text-brand-900"
+                            style={{ padding: '9px 12px' }}
+                          />
+                          <button
+                            type="submit"
+                            aria-label="Enviar respuesta"
+                            className="shrink-0 flex items-center justify-center w-10 h-10 rounded-md bg-brand-900 text-on-brand cursor-pointer hover:bg-brand-800 transition-colors duration-200"
+                          >
+                            <SendIcon />
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>

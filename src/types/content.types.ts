@@ -84,6 +84,34 @@ export interface ContactQuestion {
   type: 'text' | 'boolean'
 }
 
+// Chat flow graph — each node shows its bot messages, optionally waits for an
+// input, then moves to `next` (or the chosen option's `next`). A node with
+// `end` finishes the conversation once completed: 'send' opens the WhatsApp
+// review screen, 'close' ends it without sending anything.
+export interface ChatFlowOption {
+  label: string
+  /** Value recorded as the answer; defaults to `label`. */
+  value?: string
+  next: string
+}
+
+export type ChatFlowInput = { kind: 'text' } | { kind: 'options'; options: ChatFlowOption[] }
+
+export interface ChatFlowNode {
+  id: string
+  messages: string[]
+  input?: ChatFlowInput
+  /** Summary label; only answered nodes with a label are sent to the advisor. */
+  label?: string
+  next?: string
+  end?: 'send' | 'close'
+}
+
+export interface ChatFlowContent {
+  start: string
+  nodes: ChatFlowNode[]
+}
+
 export interface JobOpening {
   title: string
   modality: string
