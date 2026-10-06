@@ -26,10 +26,11 @@ No test runner in repo (no RED/GREEN applicable). Per task: `pnpm typecheck`, `p
 
 ## Tasks
 - [x] T1 (CA1, CA2) Amounts to $300 + first-credit copy — route: delegated (multi-file writer trigger)
-- [ ] T2 (CA3–CA7) Benefits, coverage, requirements + IMPORTANT box, FAQ #2, footer — route: delegated
+- [x] T2 (CA3–CA7) Benefits, coverage, requirements + IMPORTANT box, FAQ #2, footer — route: delegated
 - [ ] T3 (CA8) Raleigh → Nashville vacancy — route: delegated
 - [ ] T4 (CA9) Responsive visual check — pending manual/visual verification
 
 ## Progress
 - Created 2026-10-06.
 - T1 done: dc39515 (index.html meta/OG/JSON-LD, simulator min 300/step 100/quickAmounts, steps, FAQ, services). typecheck/lint OK.
+- T2 done: ece1e32 (benefits card 02, coverage w/o New Jersey, 5 requirements, requirementsNote box, FAQ #2; footer reads coverage.requirements so it syncs automatically). typecheck/lint OK.
