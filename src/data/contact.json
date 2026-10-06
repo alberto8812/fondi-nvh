@@ -9,35 +9,166 @@
   "waIntro": "Hola, quiero información sobre un crédito. Mis datos:",
   "assistantName": "Ana",
   "assistantRole": "Asesora Fondi",
-  "greeting": "¡Hola! 👋 Soy Ana, asesora de Fondi. Te ayudo a armar tu pedido en menos de un minuto y lo paso directo a un asesor por WhatsApp. ayudanos a responder las siguientes preguntas",
+  "greeting": "¡Hola! 👋 Soy Ana, asesora de Fondi. Te ayudo a iniciar tu solicitud en menos de un minuto y lo paso directo a un asesor por WhatsApp. Ayúdanos a responder las siguientes preguntas, por favor:",
   "teaser": "¿Buscas un crédito rápido? 💬",
-  "questions": [
-    {
-      "id": "nombre",
-      "label": "Tu nombre",
-      "type": "text"
-    },
-    {
-      "id": "ciudad",
-      "label": "¿En qué ciudad y estado vives?",
-      "type": "text"
-    },
-    {
-      "id": "cp",
-      "label": "¿Cuál es tu código postal?",
-      "type": "text"
-    },
-    {
-      "id": "trabajoEstable",
-      "label": "¿Tienes un trabajo estable?",
-      "type": "boolean"
-    },
-    {
-      "id": "trabajo",
-      "label": "¿En qué trabajas?",
-      "type": "text"
-    }
-  ],
+  "flow": {
+    "start": "nombre",
+    "nodes": [
+      {
+        "id": "nombre",
+        "messages": [
+          "Tu nombre completo"
+        ],
+        "input": {
+          "kind": "text"
+        },
+        "label": "Nombre",
+        "next": "ciudad"
+      },
+      {
+        "id": "ciudad",
+        "messages": [
+          "¿En qué ciudad y estado vives?"
+        ],
+        "input": {
+          "kind": "text"
+        },
+        "label": "Ciudad y estado",
+        "next": "cp"
+      },
+      {
+        "id": "cp",
+        "messages": [
+          "¿Cuál es tu código postal?"
+        ],
+        "input": {
+          "kind": "text"
+        },
+        "label": "Código postal",
+        "next": "trabajoEstable"
+      },
+      {
+        "id": "trabajoEstable",
+        "messages": [
+          "¿Tienes un trabajo estable en una empresa?"
+        ],
+        "input": {
+          "kind": "options",
+          "options": [
+            {
+              "label": "Sí",
+              "next": "trabajo"
+            },
+            {
+              "label": "No",
+              "next": "trabajo"
+            }
+          ]
+        },
+        "label": "Trabajo estable"
+      },
+      {
+        "id": "trabajo",
+        "messages": [
+          "¿En qué trabajas?"
+        ],
+        "input": {
+          "kind": "text"
+        },
+        "label": "Ocupación",
+        "next": "montos"
+      },
+      {
+        "id": "montos",
+        "messages": [
+          "Los montos de crédito disponibles van desde $300 USD y pueden ser mayores, según el resultado de tu análisis. Además, si mantienes un buen historial de pago con nosotros, podrás acceder a montos mayores. Todo esto con un proceso sencillo y sin papeleos complicados.\n¿Estás de acuerdo con que avancemos con el análisis para determinar el monto al que puedes acceder?"
+        ],
+        "input": {
+          "kind": "options",
+          "options": [
+            {
+              "label": "Sí",
+              "next": "requisitos"
+            },
+            {
+              "label": "No",
+              "next": "montoMayor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "requisitos",
+        "messages": [
+          "Para iniciar tu solicitud, necesitarás tener:\n• Tu documento de identificación\n• Un empleo fijo en una empresa o agencia\n• Un comprobante de domicilio reciente\n• Número de cuenta y número de ruta\n¿Tienes esos documentos?"
+        ],
+        "input": {
+          "kind": "options",
+          "options": [
+            {
+              "label": "Sí",
+              "next": "listo"
+            },
+            {
+              "label": "Me falta uno",
+              "next": "documentoFaltante"
+            }
+          ]
+        }
+      },
+      {
+        "id": "listo",
+        "messages": [
+          "¡Listo! 🙌 Gracias por tu confianza.\nEl asesor más cercano a tu zona se comunicará contigo lo antes posible.\nRECUERDA:\n👉 EN FONDI NO PEDIMOS NINGÚN TIPO DE DINERO ADELANTADO."
+        ],
+        "end": "send"
+      },
+      {
+        "id": "documentoFaltante",
+        "messages": [
+          "¿Cuál?"
+        ],
+        "input": {
+          "kind": "text"
+        },
+        "label": "Documento faltante",
+        "next": "revisionAsesor"
+      },
+      {
+        "id": "revisionAsesor",
+        "messages": [
+          "¡Gracias! Enviaremos tu información a un asesor para que pueda revisar tu caso y realizar el análisis correspondiente. Cuando tengamos una respuesta, nos pondremos en contacto contigo por WhatsApp."
+        ],
+        "end": "send"
+      },
+      {
+        "id": "montoMayor",
+        "messages": [
+          "Claro, entiendo que quieras comenzar con un monto mayor. 😊 En Fondi preferimos conocerte por cómo manejas tu crédito con nosotros, ya que no consultamos centrales de riesgo.\nComenzamos con un monto acorde a tu análisis y, si cumples puntualmente, vamos aumentando tu capacidad de crédito en cada renovación.\n¿Quieres que continuemos con tu solicitud?"
+        ],
+        "input": {
+          "kind": "options",
+          "options": [
+            {
+              "label": "Sí",
+              "next": "requisitos"
+            },
+            {
+              "label": "No, gracias",
+              "next": "despedida"
+            }
+          ]
+        }
+      },
+      {
+        "id": "despedida",
+        "messages": [
+          "Entendemos completamente y estamos aquí para apoyarte cuando lo necesites 🙌 No dudes en contactarnos si cambias de opinión o si podemos ayudarte en el futuro 😀"
+        ],
+        "end": "close"
+      }
+    ]
+  },
   "email": "contacto@fondi.us",
   "social": {
     "instagram": "https://www.instagram.com/fondi.financial/profilecard/?igsh=MW0xbjl5enJ3cmFlOA%3D%3D",

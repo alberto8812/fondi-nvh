@@ -158,7 +158,7 @@ export interface ContactContent {
   assistantRole: string
   greeting: string
   teaser: string
-  questions: ContactQuestion[]
+  flow: ChatFlowContent
   email: string
   social: { instagram: string; instagramHandle: string; facebook: string; facebookHandle: string }
 }

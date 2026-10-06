@@ -6,6 +6,7 @@ import { Button } from '@/components/ui'
 import { CHAT_OPEN_EVENT, type ChatOpenSeed } from '@/lib/chat-bridge'
 import {
   applyAnswer,
+  createFlow,
   createLinearFlow,
   currentNode,
   flowStatus,
@@ -101,7 +102,7 @@ function activeJobTitles() {
 }
 
 function buildFlow(mode: ChatMode, jobTitle: string | undefined): ChatFlow {
-  if (mode === 'loan') return createLinearFlow(contact.questions)
+  if (mode === 'loan') return createFlow(contact.flow)
   if (jobTitle) return createLinearFlow(jobApplication.questions)
   const options = activeJobTitles()
   return createLinearFlow([
