@@ -27,10 +27,12 @@ No test runner in repo (no RED/GREEN applicable). Per task: `pnpm typecheck`, `p
 ## Tasks
 - [x] T1 (CA1, CA2) Amounts to $300 + first-credit copy — route: delegated (multi-file writer trigger)
 - [x] T2 (CA3–CA7) Benefits, coverage, requirements + IMPORTANT box, FAQ #2, footer — route: delegated
-- [ ] T3 (CA8) Raleigh → Nashville vacancy — route: delegated
+- [x] T3 (CA8) Raleigh → Nashville vacancy — route: delegated
 - [ ] T4 (CA9) Responsive visual check — pending manual/visual verification
 
 ## Progress
 - Created 2026-10-06.
 - T1 done: dc39515 (index.html meta/OG/JSON-LD, simulator min 300/step 100/quickAmounts, steps, FAQ, services). typecheck/lint OK.
 - T2 done: ece1e32 (benefits card 02, coverage w/o New Jersey, 5 requirements, requirementsNote box, FAQ #2; footer reads coverage.requirements so it syncs automatically). typecheck/lint OK.
+- T3 done: c9faa3e (jobs.json Nashville 2026-10-06, sitemap careers lastmod 2026-10-06). Final: typecheck OK, lint OK (1 pre-existing warning), build OK, leftover rg empty.
+- Next: T4 manual responsive check of the IMPORTANTE box (mobile/desktop) and images/videos with embedded amounts.
