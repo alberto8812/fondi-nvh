@@ -1,19 +1,20 @@
 {
   "monthlyRate": 0.05,
-  "montoMin": 500,
+  "montoMin": 300,
   "montoMax": 10000,
-  "montoStep": 500,
+  "montoStep": 100,
   "montoDefault": 2500,
   "plazoMin": 3,
   "plazoMax": 36,
   "plazoStep": 3,
   "plazoDefault": 12,
   "quickAmounts": [
+    300,
     500,
     1000,
     1500,
     2000
   ],
-  "rangeSubtext": "Tu primer crédito puede ser de $500 a $2,000 USD. Con un buen historial de pago, podrás acceder a montos mayores en tu próxima solicitud.",
+  "rangeSubtext": "Para iniciar, puedes solicitar un crédito de $300 a $2,000 USD, sujeto a análisis. Si mantienes un buen historial de pago con nosotros, podrás acceder a montos mayores en tu próximo crédito.",
   "waNumber": "15559889513"
 }
