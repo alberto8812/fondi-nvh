@@ -380,6 +380,11 @@ export function FloatingChatWidget() {
                     >
                       Enviar por WhatsApp
                     </Button>
+                    {!chat.turnstileToken && (
+                      <p className="text-center text-xs text-neutral-500 mt-2 mb-0" aria-live="polite">
+                        Verificando…
+                      </p>
+                    )}
                   </div>
                 </motion.div>
               ) : (
