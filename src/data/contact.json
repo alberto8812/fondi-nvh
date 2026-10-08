@@ -81,7 +81,7 @@
       {
         "id": "montos",
         "messages": [
-          "Los montos de crédito disponibles van desde $300 USD y pueden ser mayores, según el resultado de tu análisis. Además, si mantienes un buen historial de pago con nosotros, podrás acceder a montos mayores. Todo esto con un proceso sencillo y sin papeleos complicados.\n¿Estás de acuerdo con que avancemos con el análisis para determinar el monto al que puedes acceder?"
+          " Los créditos van desde $300 USD y pueden ser por un monto mayor, dependiendo de tu perfil. Si mantienes un buen historial de pago con nosotros, también podrás acceder a mayores montos. 💰 \n \n ¿Te gustaría saber cuánto podemos ofrecerte?"
         ],
         "input": {
           "kind": "options",
@@ -119,7 +119,7 @@
       {
         "id": "listo",
         "messages": [
-          "¡Listo! 🙌 Gracias por tu confianza.\nEl asesor más cercano a tu zona se comunicará contigo lo antes posible.\nRECUERDA:\n👉 EN FONDI NO PEDIMOS NINGÚN TIPO DE DINERO ADELANTADO."
+          "¡Perfecto! 😊 Ya casi terminamos.\nRevisa tus respuestas y toca \"Enviar por WhatsApp\" para que uno de nuestros asesores continúe con tu proceso. 👇\n\nRECUERDA:\n👉 EN FONDI NO PEDIMOS NINGÚN TIPO DE DINERO ADELANTADO."
         ],
         "end": "send"
       },

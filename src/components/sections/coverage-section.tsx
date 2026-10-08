@@ -146,30 +146,26 @@ export function CoverageSection() {
                 </p>
               </motion.li>
             ))}
-          </motion.ul>
-
-          {note && (
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={VP}
-              role="note"
-              className="mt-6 rounded-lg border border-accent-500/50 border-l-4 border-l-accent-700 bg-accent-100 px-4 py-4 sm:px-5"
-            >
-              <p
-                className="text-brand-800 m-0 leading-[1.6] break-words"
-                style={{ fontSize: "14px" }}
+            {note && (
+              <motion.li
+                variants={staggerItem}
+                role="note"
+                className="flex items-center rounded-lg border border-accent-500/50 border-l-4 border-l-accent-700 bg-accent-100 px-4 py-4 sm:px-5"
               >
-                {note.label && (
-                  <strong className="font-semibold text-brand-900">
-                    {note.label}
-                  </strong>
-                )}{" "}
-                {note.body}
-              </p>
-            </motion.div>
-          )}
+                <p
+                  className="text-brand-800 m-0 leading-[1.6] break-words"
+                  style={{ fontSize: "14px" }}
+                >
+                  {note.label && (
+                    <strong className="font-semibold text-brand-900">
+                      {note.label}
+                    </strong>
+                  )}{" "}
+                  {note.body}
+                </p>
+              </motion.li>
+            )}
+          </motion.ul>
         </motion.div>
       </Container>
     </section>
