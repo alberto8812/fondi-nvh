@@ -328,7 +328,7 @@ export function FloatingChatWidget() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, ease: PANEL_EASE }}
-                  className="flex flex-col"
+                  className="flex flex-col flex-1 min-h-0"
                 >
                   {node && !node.input && node.messages.length > 0 && (
                     <div className="flex flex-col gap-2.5 px-4 pt-4 shrink-0">
@@ -345,7 +345,7 @@ export function FloatingChatWidget() {
                       count — the send action below must always stay
                       reachable, whether there are 3 answers or 12. */}
                   <ul
-                    className="overflow-y-auto flex flex-col gap-2 px-4 text-[13.5px] text-neutral-600"
+                    className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-2 px-4 text-[13.5px] text-neutral-600"
                     style={{
                       paddingLeft: '16px',
                       listStyle: 'none',
