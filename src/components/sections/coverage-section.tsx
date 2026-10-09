@@ -42,7 +42,7 @@ export function CoverageSection() {
           </h2>
           <p
             className="text-base leading-[1.65] text-brand-700"
-            style={{ margin: "0 0 24px", maxWidth: "640px" }}
+            style={{ margin: "0 0 24px", textWrap: "pretty" }}
           >
             {coverage.intro}
           </p>
