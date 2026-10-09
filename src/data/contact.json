@@ -61,11 +61,18 @@
             },
             {
               "label": "No",
-              "next": "trabajo"
+              "next": "sinEmpleo"
             }
           ]
         },
         "label": "Trabajo estable"
+      },
+      {
+        "id": "sinEmpleo",
+        "messages": [
+          "Actualmente sólo contamos con productos financieros para personas que cuenten con empleo fijo en una empresa, en cuanto tengamos un producto adecuado para ti, nos pondremos en contacto. Hasta pronto! 🤩🙏"
+        ],
+        "end": "close"
       },
       {
         "id": "trabajo",
