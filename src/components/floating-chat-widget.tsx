@@ -131,6 +131,16 @@ function initialState(mode: ChatMode, jobTitle?: string): ChatState {
   }
 }
 
+// Opening the panel resumes an in-progress conversation, but starts a fresh
+// one when the context changed or the previous one already ended (closed or
+// in review) — otherwise a finished chat would be a dead end until reload.
+function openedState(prev: ChatState, mode: ChatMode, jobTitle: string | undefined, monto: string | undefined): ChatState {
+  const contextChanged = prev.mode !== mode || prev.jobTitle !== jobTitle
+  const finished = flowStatus(prev.flow, prev.path) !== 'active'
+  const base = contextChanged || finished ? initialState(mode, jobTitle) : prev
+  return { ...base, open: true, teaser: 'dismissed', monto }
+}
+
 export function FloatingChatWidget() {
   const location = useLocation()
   const routeMode: ChatMode = location.pathname.startsWith('/careers') ? 'application' : 'loan'
@@ -168,26 +178,7 @@ export function FloatingChatWidget() {
       const mode = detail?.mode ?? routeModeRef.current
       const jobTitle = detail?.jobTitle
 
-      setChat((prev) => {
-        const contextChanged = prev.mode !== mode || prev.jobTitle !== jobTitle
-        const shouldReset = contextChanged || flowStatus(prev.flow, prev.path) !== 'active'
-
-        if (shouldReset) {
-          return {
-            ...initialState(mode, jobTitle),
-            open: true,
-            teaser: 'dismissed',
-            monto: detail?.monto ?? prev.monto,
-          }
-        }
-
-        return {
-          ...prev,
-          open: true,
-          teaser: 'dismissed',
-          monto: detail?.monto ?? prev.monto,
-        }
-      })
+      setChat((prev) => openedState(prev, mode, jobTitle, detail?.monto ?? prev.monto))
     }
     window.addEventListener(CHAT_OPEN_EVENT, openFromEvent)
     return () => window.removeEventListener(CHAT_OPEN_EVENT, openFromEvent)
@@ -470,6 +461,24 @@ export function FloatingChatWidget() {
                       )}
                     </div>
                   )}
+
+                  {status === 'closed' && !chat.typing && (
+                    <div className="px-3 py-3 border-t border-neutral-100">
+                      <button
+                        onClick={() =>
+                          setChat((prev) => ({
+                            ...initialState(prev.mode, prev.jobTitle),
+                            open: true,
+                            teaser: 'dismissed',
+                            monto: prev.monto,
+                          }))
+                        }
+                        className="w-full font-medium text-sm px-5 py-2.5 rounded-full cursor-pointer transition-colors duration-200 border border-neutral-300 bg-neutral-50 text-neutral-700 hover:border-brand-900 hover:bg-brand-900 hover:text-on-brand"
+                      >
+                        Empezar de nuevo
+                      </button>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -487,7 +496,7 @@ export function FloatingChatWidget() {
             transition={{ duration: 0.2, ease: PANEL_EASE }}
             style={{ transformOrigin: 'bottom right' }}
             className="relative max-w-[240px] rounded-2xl rounded-br-sm bg-neutral-50 shadow-lg border border-neutral-200 pl-4 pr-7 py-3 text-[13.5px] text-neutral-700 cursor-pointer"
-            onClick={() => setChat((prev) => ({ ...prev, open: true, teaser: 'dismissed' }))}
+            onClick={() => setChat((prev) => openedState(prev, prev.mode, prev.jobTitle, prev.monto))}
           >
             {teaserText}
             <button
@@ -507,7 +516,11 @@ export function FloatingChatWidget() {
       </AnimatePresence>
 
       <motion.button
-        onClick={() => setChat((prev) => ({ ...prev, open: !prev.open, teaser: 'dismissed' }))}
+        onClick={() =>
+          setChat((prev) =>
+            prev.open ? { ...prev, open: false, teaser: 'dismissed' } : openedState(prev, prev.mode, prev.jobTitle, prev.monto),
+          )
+        }
         aria-label={chat.open ? 'Cerrar chat' : 'Abrir chat'}
         whileTap={{ scale: 0.94 }}
         className="relative flex items-center justify-center w-14 h-14 rounded-full bg-whatsapp hover:bg-whatsapp-hover text-on-brand cursor-pointer transition-colors duration-200"
